@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MAK AutoEditor - Video Creation Suite</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/panels.css">
+  <link rel="stylesheet" href="/css/preview.css">
+  <link rel="stylesheet" href="/css/timeline.css">
+  <link rel="stylesheet" href="/css/modals.css">
+  <link rel="stylesheet" href="/css/creator-mode.css">
+</head>
+<body class="dark-theme mode-creator">
+
+  <!-- ============================================================ -->
+  <!-- ZONE A: TOP BAR                                              -->
+  <!-- ============================================================ -->
+  <header class="top-nav" id="topNav">
+    <div class="nav-left">
+      <div class="brand">
+        <div class="brand-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818CF8" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 17L12 22L22 17" stroke="#6366F1" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#4F46E5" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-title-wrap">
+          <span class="brand-name">MAK AutoEditor</span>
+        </div>
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="project-title-box">
+        <input type="text" class="project-name-input" id="projectNameInput" value="My Video Project 01" title="Click to rename project" spellcheck="false">
+        <span class="save-indicator saved" id="saveIndicator">● Saved</span>
+      </div>
+    </div>
+
+    <!-- Center Status & Guide -->
+    <div class="nav-center">
+      <button class="btn btn-sm btn-ghost creator-guide-top-btn" id="btnOpenCreatorGuide" title="Open Studio Guide & Image Naming Tips">
+        <span class="guide-icon">📖</span>
+        <span>Studio Guide</span>
+      </button>
+
+      <button class="performance-pill" id="btnPerformancePopover" title="Click for System Performance & Proxy Settings">
+        <span class="status-dot green"></span>
+        <span id="perfStatusText">System Ready</span>
+        <span class="pill-badge">1080p</span>
+      </button>
+    </div>
+
+    <!-- Right Primary Actions -->
+    <div class="nav-right">
+      <button class="btn-icon-subtle" id="btnTopUndo" title="Undo (Ctrl+Z)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+      </button>
+      <button class="btn-icon-subtle" id="btnTopRedo" title="Redo (Ctrl+Shift+Z)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+      </button>
+
+      <div class="nav-divider"></div>
+
+      <button class="btn btn-secondary btn-sm" id="btnNewProjectTop" title="Start a Fresh New Project">
+        <span>📄 New Project</span>
+      </button>
+
+      <button class="btn btn-secondary btn-sm" id="btnSaveProjectTop" title="Save Project (Ctrl+S)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span>Save</span>
+      </button>
+
+      <button class="btn btn-primary btn-sm btn-export-cta" id="btnOpenExportModal" title="Export Final Master Video (Ctrl+E)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Export MP4</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- MAQ AI STORY STUDIO: 5-STEP GUIDED STORYTELLING WORKSPACE    -->
+  <!-- ============================================================ -->
+  <div class="creator-workspace-container" id="creatorWorkspaceContainer">
+    <!-- Stepper Progress Header -->
+    <div class="creator-stepper-header">
+      <div class="stepper-progress-bar">
+        <div class="stepper-progress-fill" id="creatorProgressFill" style="width: 20%;"></div>
+      </div>
+
+      <button class="stepper-step-item active" data-step="1" id="stepItem1">
+        <div class="stepper-badge" id="stepBadge1">1</div>
+        <span class="stepper-label">Voiceover</span>
+      </button>
+
+      <button class="stepper-step-item" data-step="2" id="stepItem2">
+        <div class="stepper-badge" id="stepBadge2">2</div>
+        <span class="stepper-label">Visual Scenes</span>
+      </button>
+
+      <button class="stepper-step-item" data-step="3" id="stepItem3">
+        <div class="stepper-badge" id="stepBadge3">3</div>
+        <span class="stepper-label">Creative Directives</span>
+      </button>
+
+      <button class="stepper-step-item" data-step="4" id="stepItem4">
+        <div class="stepper-badge" id="stepBadge4">4</div>
+        <span class="stepper-label">Review & Storyboard</span>
+      </button>
+
+      <button class="stepper-step-item" data-step="5" id="stepItem5">
+        <div class="stepper-badge" id="stepBadge5">5</div>
+        <span class="stepper-label">Master Export</span>
+      </button>
+    </div>
+
+    <!-- Step 1: Voiceover Narration -->
+    <div class="creator-card-box" id="creatorStep1">
+      <div class="step-headline-wrap">
+        <h2>Step 1: Import Your Narration Audio</h2>
+        <p>Drop your voiceover audio file. The engine will automatically detect exact timing and synchronize scenes.</p>
+      </div>
+
+      <div class="creator-drop-zone" id="creatorVoDropZone">
+        <div class="drop-icon-circle">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <div class="drop-primary-txt">Drag & drop your voiceover audio file here</div>
+        <div class="drop-secondary-txt">Supports MP3, WAV, M4A, AAC, FLAC (or click to browse files)</div>
+      </div>
+
+      <div class="creator-quick-actions">
+        <button class="btn btn-secondary btn-sm" id="btnCreatorBrowseVO">📁 Browse Audio File</button>
+      </div>
+
+      <!-- Creator Audio Best Practices Guide -->
+      <div class="creator-instruction-card audio-instruct-card">
+        <div class="instruct-header">
+          <span class="instruct-icon">🎙</span>
+          <h4>Narration Audio Best Practices:</h4>
+        </div>
+        <div class="instruct-pills-wrap">
+          <span class="instruct-pill">✓ Formats: MP3, WAV, M4A, FLAC</span>
+          <span class="instruct-pill">✓ 44.1 kHz or 48 kHz Stereo</span>
+          <span class="instruct-pill">✓ Clean Speech Audio</span>
+        </div>
+        <p class="instruct-desc">💡 <strong>How it works:</strong> Your voiceover duration sets the project's master timeline. All image scenes in Step 2 will automatically pace themselves to match your narration!</p>
+      </div>
+
+      <div class="creator-loaded-card hidden" id="creatorVoLoadedCard">
+        <div class="creator-audio-preview">
+          <button class="creator-play-btn" id="btnCreatorPlayVO">▶</button>
+          <div>
+            <strong id="creatorVoTitle" style="color:#FFF; display:block;">voiceover.mp3</strong>
+            <small id="creatorVoDuration" style="color:#94A3B8;">00:30.0 • 44.1 kHz Stereo</small>
+          </div>
+        </div>
+        <button class="btn-icon-xs text-danger" id="btnCreatorRemoveVO" title="Remove Audio">✕</button>
+      </div>
+
+      <div class="creator-stepper-footer" style="justify-content: flex-end;">
+        <div class="footer-nav-buttons">
+          <button class="btn btn-primary" id="btnStep1Next">Next: Add Media Scenes ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Media Import -->
+    <div class="creator-card-box hidden" id="creatorStep2">
+      <div class="step-headline-wrap">
+        <h2>Step 2: Import Images & Video Clips</h2>
+        <p>Drop your timestamped scenes (e.g. 0-03.png, 1-03.png), raw media, or MAQFLOW export ZIP.</p>
+      </div>
+
+      <div class="creator-drop-zone" id="creatorMediaDropZone">
+        <div class="drop-icon-circle">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="drop-primary-txt">Drag & drop scene images, videos, or folder</div>
+        <div class="drop-secondary-txt">PNG, JPG, WEBP, MP4, MOV or MAQFLOW ZIP archive</div>
+      </div>
+
+      <div class="creator-quick-actions">
+        <button class="btn btn-secondary btn-sm" id="btnCreatorBrowseMedia">📁 Select Images / Videos</button>
+        <button class="btn btn-secondary btn-sm" id="btnCreatorBrowseFolder">📂 Select Entire Folder</button>
+        <button class="btn btn-outline btn-sm btn-clear-all" id="btnCreatorClearAllMedia" title="Remove all imported media scenes" style="color: #F87171; border-color: rgba(239, 68, 68, 0.4);">🗑 Clear All</button>
+      </div>
+
+      <!-- Prominent Image Naming & Formatting Guide for Creators -->
+      <div class="creator-naming-guide-card">
+        <div class="naming-guide-header">
+          <span class="naming-icon">📋</span>
+          <div>
+            <h3>How to Name Your Images for Automatic Storytelling</h3>
+            <p>MAQ Auto Editor reads filename timestamps to place images on the timeline automatically!</p>
+          </div>
+        </div>
+
+        <div class="naming-columns-grid">
+          <div class="naming-box recommended">
+            <div class="box-tag">⭐ Recommended: Exact Timestamps</div>
+            <div class="code-badge-row"><code>0-03.png</code> ➔ Appears at <strong>00:03</strong> (3 sec)</div>
+            <div class="code-badge-row"><code>0-15.png</code> ➔ Appears at <strong>00:15</strong> (15 sec)</div>
+            <div class="code-badge-row"><code>1-02.png</code> ➔ Appears at <strong>01:02</strong> (1 min 2s)</div>
+            <div class="code-badge-row"><code>2-30.jpg</code> ➔ Appears at <strong>02:30</strong> (2 min 30s)</div>
+            <p class="box-note">Prefix filenames with <code>M-SS</code>. The editor snaps each scene to that exact moment in your narration!</p>
+          </div>
+
+          <div class="naming-box">
+            <div class="box-tag">⚡ AI Auto-Paced: Sequential Numbers</div>
+            <div class="code-badge-row"><code>01.png</code>, <code>02.png</code>, <code>03.png</code>...</div>
+            <div class="code-badge-row"><code>scene_1.jpg</code>, <code>scene_2.jpg</code>...</div>
+            <p class="box-note">If files have no timestamps, the AI distributes them evenly across your narration (~4.5s per scene).</p>
+          </div>
+
+          <div class="naming-box">
+            <div class="box-tag">📁 Folders & MAQFLOW ZIP</div>
+            <div class="code-badge-row">Click <strong>+ Import Folder</strong> or drop a <strong>.zip</strong></div>
+            <p class="box-note">Directly import an entire folder of generated scenes or archives from the <strong>MAQFLOW Chrome Extension</strong>.</p>
+          </div>
+        </div>
+
+        <div class="naming-meta-specs">
+          <div class="meta-spec-chip">
+            <strong>Formats:</strong> PNG (sharp text/graphics), JPG/WebP (photographic), MP4/MOV (video clips)
+          </div>
+          <div class="meta-spec-chip">
+            <strong>Resolutions:</strong> 1920x1080 (16:9 Landscape) • 1080x1920 (9:16 Shorts/Reels/TikTok)
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact Media Gallery Box -->
+      <div class="creator-gallery-box" style="margin-top:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 2px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:13px;">🖼️</span>
+            <strong style="font-size:12.5px;color:#F8FAFC;">Imported Scenes (<span id="creatorMediaCount">0 scenes</span>)</strong>
+            <span class="guide-badge" style="background:rgba(56,189,248,0.15);color:#38BDF8;border:1px solid rgba(56,189,248,0.3);font-size:10px;padding:2px 8px;border-radius:12px;">Auto-Sorted by Timestamp</span>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline" id="btnClearAllMedia" style="font-size:11px;padding:3px 8px;color:#EF4444;border-color:rgba(239,68,68,0.35);">🗑 Clear All</button>
+        </div>
+        <div class="creator-media-grid" id="creatorMediaGrid"></div>
+      </div>
+
+      <div class="creator-stepper-footer">
+        <button class="btn btn-outline" id="btnStep2Back">← Back</button>
+        <div class="footer-nav-buttons">
+          <button class="btn btn-primary" id="btnStep2Next">Next: Auto Edit ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Creative Directives Studio -->
+    <div class="creator-card-box hidden" id="creatorStep3">
+      <div class="step-headline-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2>Step 3: Creative Directives Studio</h2>
+            <p>Direct the AI on motion, modern transitions, color atmosphere, music, sound design, and subtitles.</p>
+          </div>
+          <!-- Quick 1-Click Action Bar -->
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button type="button" class="btn btn-primary btn-lg magic-assemble-btn" id="btnZeroConfigAssembleTop" style="background:linear-gradient(135deg, #6366F1, #8B5CF6);border:none;box-shadow:0 0 20px rgba(99,102,241,0.4);font-weight:700;">
+              <span>⚡ Magic Auto-Assemble (Zero Config)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets & Mood Row -->
+      <div class="creator-presets-grid" id="creatorPresetsGrid">
+        <div class="creator-preset-card active" data-preset="CINEMATIC">
+          <div class="preset-card-top">
+            <span class="preset-title">🎬 Cinematic Storytelling</span>
+            <span class="preset-badge">Recommended</span>
+          </div>
+          <p class="preset-desc">Subtle slow push/pull motion, warm cinematic tones, gentle dissolves, conservative sound effects, classic serif captions.</p>
+          <div class="preset-features-row">
+            <span class="preset-pill">Ken Burns</span>
+            <span class="preset-pill">Smart Ducking</span>
+            <span class="preset-pill">Warm Film LUT</span>
+          </div>
+        </div>
+
+        <div class="creator-preset-card" data-preset="DYNAMIC_STORY">
+          <div class="preset-card-top">
+            <span class="preset-title">⚡ Dynamic Storyteller</span>
+            <span class="preset-badge">High Energy</span>
+          </div>
+          <p class="preset-desc">Punchy zooms and pans, dynamic slide transitions, bold yellow highlight captions, energetic sound effects, assertive voiceover ducking.</p>
+          <div class="preset-features-row">
+            <span class="preset-pill">Punch Zoom</span>
+            <span class="preset-pill">Yellow Word Pop</span>
+            <span class="preset-pill">Impact SFX</span>
+          </div>
+        </div>
+
+        <div class="creator-preset-card" data-preset="DOCUMENTARY">
+          <div class="preset-card-top">
+            <span class="preset-title">📜 Historical Documentary</span>
+            <span class="preset-badge">Documentary</span>
+          </div>
+          <p class="preset-desc">Careful Ken Burns pacing, traditional cuts and dissolves, documentary subtitle bars, atmospheric ambient sound.</p>
+          <div class="preset-features-row">
+            <span class="preset-pill">Slow Drift</span>
+            <span class="preset-pill">Lower Thirds</span>
+            <span class="preset-pill">Ambient SFX</span>
+          </div>
+        </div>
+
+        <div class="creator-preset-card" data-preset="MINIMAL">
+          <div class="preset-card-top">
+            <span class="preset-title">🌿 Clean Minimalist</span>
+            <span class="preset-badge">Minimal</span>
+          </div>
+          <p class="preset-desc">Pure clean cuts, zero visual clutter, crisp modern sans-serif captions, high voiceover priority without music.</p>
+          <div class="preset-features-row">
+            <span class="preset-pill">Hard Cuts</span>
+            <span class="preset-pill">Clean VO</span>
+            <span class="preset-pill">Zero Clutter</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Studio Directives Control Grid -->
+      <div class="creator-options-box" style="padding:18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-top:16px;">
+
+        <!-- 1. Color Grading & Visual Atmosphere Suite -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;">
+          <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:8px;">🎨 Visual Color Grading & Atmosphere:</label>
+          <div class="grading-chips-row" id="boxGradingPresets" style="display:flex;flex-wrap:wrap;gap:8px;">
+            <label class="grading-chip active"><input type="radio" name="radGradingPreset" value="WARM_CINEMA" checked><span>🌅 Cinematic Warm</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="TEAL_ORANGE"><span>🎬 Teal & Orange</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="COOL"><span>❄️ Cool Arctic</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="DARK"><span>🌑 Dark Mystery</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="HIGH_CONTRAST"><span>⚡ High Contrast Bold</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="COLD_NOIR"><span>🏙️ Cold Noir</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="VINTAGE_SEPIA"><span>📜 Vintage 1930s</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="SOFT"><span>✨ Soft Dream Glow</span></label>
+            <label class="grading-chip"><input type="radio" name="radGradingPreset" value="NATURAL"><span>🌿 Original Neutral</span></label>
+          </div>
+        </div>
+
+        <!-- 2. Modern Transitions Engine -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;">⇄ Modern Transitions Engine:</label>
+            <span style="font-size:11px;color:#94A3B8;">Auto-placed seamlessly between scenes</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:18px;margin-bottom:10px;">
+            <label class="creator-radio-label" style="display:flex;align-items:center;gap:6px;font-size:12px;color:#E2E8F0;cursor:pointer;">
+              <input type="radio" name="radTransitionMode" value="mixture" checked id="radTransMixture">
+              <span><strong>✨ Smart AI Mixture:</strong> Dynamically rotates dissolves, zooms, slides, wipes & radials</span>
+            </label>
+            <label class="creator-radio-label" style="display:flex;align-items:center;gap:6px;font-size:12px;color:#E2E8F0;cursor:pointer;">
+              <input type="radio" name="radTransitionMode" value="custom" id="radTransCustom">
+              <span><strong>🎯 Pick Specific Transitions:</strong> Restrict AI to your favorite selections below</span>
+            </label>
+          </div>
+
+          <!-- Expanded Transition Pills Grid -->
+          <div class="transitions-chips-grid hidden" id="boxSpecificTransitions" style="display:flex;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="DISSOLVE" checked><span>◐ Cross Dissolve</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SMOOTH_ZOOM" checked><span>🔎 Smooth Zoom In</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="ZOOM_OUT" checked><span>🔍 Smooth Zoom Out</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SMOOTH_LEFT" checked><span>⇠ Smooth Slide Left</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SMOOTH_RIGHT"><span>⇢ Smooth Slide Right</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SLIDE_LEFT"><span>← Push Left</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SLIDE_RIGHT"><span>→ Push Right</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="SLIDE_UP"><span>⇡ Slide Up</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="WIPE_LEFT"><span>◀ Dynamic Wipe Left</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="WIPE_RIGHT"><span>▶ Dynamic Wipe Right</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="DIP_BLACK" checked><span>⬛ Dip to Black</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="DIP_WHITE"><span>⬜ Dip to White</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="RADIAL"><span>⏱ Radial Clock</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="CIRCLE_OPEN"><span>◯ Iris Circle Reveal</span></label>
+            <label class="trans-chip"><input type="checkbox" name="chkTransSpecific" value="PIXELIZE"><span>▦ Digital Pixelize</span></label>
+          </div>
+        </div>
+
+        <!-- 3. Camera Motion & Visual Flow Suite -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;">🎥 Camera Motion Engine:</label>
+            <span style="font-size:11px;color:#94A3B8;">Dynamic 60fps pans, zooms & cinematic drift</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:18px;margin-bottom:10px;">
+            <label class="creator-radio-label" style="display:flex;align-items:center;gap:6px;font-size:12px;color:#E2E8F0;cursor:pointer;">
+              <input type="radio" name="radMotionMode" value="mixture" checked id="radMotionMixture">
+              <span><strong>✨ Smart AI Motion:</strong> Dynamically rotates push, pull, Ken Burns drift & subtle pans</span>
+            </label>
+            <label class="creator-radio-label" style="display:flex;align-items:center;gap:6px;font-size:12px;color:#E2E8F0;cursor:pointer;">
+              <input type="radio" name="radMotionMode" value="custom" id="radMotionCustom">
+              <span><strong>🎯 Select Motion Styles:</strong> Choose 1 or multi-select favorite motions to cycle across scenes</span>
+            </label>
+          </div>
+
+          <div class="motion-chips-grid hidden" id="boxSpecificMotions" style="display:flex;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <label class="motion-chip active"><input type="checkbox" name="chkMotionSpecific" value="SLOW_PUSH" checked><span>🔍+ Slow Push In</span></label>
+            <label class="motion-chip active"><input type="checkbox" name="chkMotionSpecific" value="SLOW_PULL" checked><span>🔍- Slow Pull Out</span></label>
+            <label class="motion-chip active"><input type="checkbox" name="chkMotionSpecific" value="KEN_BURNS_TL_BR" checked><span>↘ Ken Burns TL➔BR</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="KEN_BURNS_BR_TL"><span>↖ Ken Burns BR➔TL</span></label>
+            <label class="motion-chip active"><input type="checkbox" name="chkMotionSpecific" value="ORBIT_DRIFT" checked><span>💫 Orbit Drift</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="DIAGONAL_FLOAT"><span>↗ Diagonal Float</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="PAN_LEFT"><span>← Pan Left</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="PAN_RIGHT"><span>→ Pan Right</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="CENTER_PUNCH"><span>🎯 Dynamic Punch</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="DRAMATIC_ZOOM"><span>⚡ Impact Zoom</span></label>
+            <label class="motion-chip"><input type="checkbox" name="chkMotionSpecific" value="NONE"><span>⏹ Static No Motion</span></label>
+          </div>
+        </div>
+
+        <!-- 4. Sound Effects & Custom SFX Multi-Select Suite -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <div>
+              <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;">🔊 Organic Cinematic Sound Effects (SFX):</label>
+              <span style="font-size:11px;color:#94A3B8;display:block;margin-top:2px;">Select 1 or more favorite sounds to dynamically rotate across scene transitions</span>
+            </div>
+            <label class="creator-checkbox-row" style="margin:0;cursor:pointer;">
+              <input type="checkbox" id="chkCreatorSFXEnabled" checked>
+              <span style="font-size:11.5px;color:#E2E8F0;">Enable SFX on Transitions</span>
+            </label>
+          </div>
+
+          <!-- Multi-Select SFX Chips Grid with Audition Buttons -->
+          <div class="sfx-chips-grid" id="boxCreatorSFXChips" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+            <div class="sfx-chip-card active" data-sfx="assets/sfx/whoosh/organic_air_whoosh_01.wav">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0;">
+                <input type="checkbox" name="chkSFXItem" value="assets/sfx/whoosh/organic_air_whoosh_01.wav" checked>
+                <span>🍃 Soft Air Whoosh</span>
+              </label>
+              <button type="button" class="btn-sfx-audition" data-audio="assets/sfx/whoosh/organic_air_whoosh_01.wav" title="Preview Sound Effect">▶</button>
+            </div>
+
+            <div class="sfx-chip-card active" data-sfx="assets/sfx/whoosh/soft_cinematic_swish_02.wav">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0;">
+                <input type="checkbox" name="chkSFXItem" value="assets/sfx/whoosh/soft_cinematic_swish_02.wav" checked>
+                <span>💨 Cinematic Swish</span>
+              </label>
+              <button type="button" class="btn-sfx-audition" data-audio="assets/sfx/whoosh/soft_cinematic_swish_02.wav" title="Preview Sound Effect">▶</button>
+            </div>
+
+            <div class="sfx-chip-card active" data-sfx="assets/sfx/transition/smooth_camera_pan.wav">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0;">
+                <input type="checkbox" name="chkSFXItem" value="assets/sfx/transition/smooth_camera_pan.wav" checked>
+                <span>📷 Smooth Camera Pan</span>
+              </label>
+              <button type="button" class="btn-sfx-audition" data-audio="assets/sfx/transition/smooth_camera_pan.wav" title="Preview Sound Effect">▶</button>
+            </div>
+
+            <div class="sfx-chip-card" data-sfx="assets/sfx/transition/deep_sub_transition.wav">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0;">
+                <input type="checkbox" name="chkSFXItem" value="assets/sfx/transition/deep_sub_transition.wav">
+                <span>🌊 Deep Sub Transition</span>
+              </label>
+              <button type="button" class="btn-sfx-audition" data-audio="assets/sfx/transition/deep_sub_transition.wav" title="Preview Sound Effect">▶</button>
+            </div>
+          </div>
+
+          <!-- Custom Upload Option & Quick Mute -->
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="file" id="fileCreatorCustomSFX" accept="audio/*" style="display:none;">
+              <button type="button" class="btn btn-sm btn-outline" id="btnUploadCustomSFX" style="color:#38BDF8;border-color:rgba(56,189,248,0.4);font-size:11.5px;">📁 Upload Custom SFX File</button>
+              <span id="lblCustomSFXName" style="font-size:11px;color:#10B981;"></span>
+            </div>
+            <span style="font-size:11px;color:#94A3B8;">Selected sounds will alternate smoothly at each cut</span>
+          </div>
+        </div>
+
+        <!-- 5. Background Music & Interactive Volume Control -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+            <div style="flex:1;min-width:260px;">
+              <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:6px;">🎵 Background Music Score / Song:</label>
+              <div style="display:flex;gap:8px;">
+                <select id="selectCreatorBGMTrack" class="search-input" style="flex:1;padding:8px 12px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:8px;">
+                  <option value="cinematic_ambient_01.mp3" selected>🎬 Cinematic Majesty (Ambient)</option>
+                  <option value="calm_story_01.mp3">🌿 Reflective Journey (Calm)</option>
+                  <option value="emotional_piano_01.mp3">🎹 Nostalgic Memories (Piano)</option>
+                  <option value="suspense_pulse_01.mp3">👁 Dark Investigation (Suspense)</option>
+                  <option value="energetic_beat_01.mp3">⚡ Dynamic Drive (High Energy)</option>
+                  <option value="documentary_historic_01.mp3">📜 Archive Chronology (Doc)</option>
+                </select>
+                <input type="file" id="fileCreatorCustomBGM" accept="audio/*" style="display:none;">
+                <button type="button" class="btn btn-sm btn-outline" id="btnUploadCustomBGM" title="Upload custom song from computer">📁 Upload Song</button>
+              </div>
+              <span id="lblCustomBGMName" style="font-size:10.5px;color:#10B981;margin-top:4px;display:block;"></span>
+            </div>
+
+            <!-- Music Volume Slider -->
+            <div style="width:220px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="font-size:12px;color:#CBD5E1;font-weight:600;">Music Volume:</span>
+                <strong id="valCreatorMusicVol" style="font-size:12px;color:#38BDF8;font-family:monospace;">35%</strong>
+              </div>
+              <input type="range" class="range-slider" id="sliderCreatorMusicVol" min="0" max="100" value="35" style="width:100%;accent-color:#38BDF8;">
+            </div>
+          </div>
+
+          <!-- Toggles row -->
+          <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <label class="creator-checkbox-row" style="margin:0;">
+              <input type="checkbox" id="chkCreatorBGM" checked>
+              <span><strong>Dynamic Voiceover Ducking:</strong> Automatically lowers music by -18 dB during narration.</span>
+            </label>
+            <label class="creator-checkbox-row" style="margin:0;">
+              <input type="checkbox" id="chkCreatorTextOverlays" checked>
+              <span><strong>Smart Graphic Callouts:</strong> Auto-highlight key numbers and dramatic statistics.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. Captions & Subtitles Setup -->
+        <div style="background:rgba(0,0,0,0.25);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <label style="font-size:12.5px;color:#CBD5E1;font-weight:700;">💬 Captions & Subtitles Engine:</label>
+              <label class="creator-checkbox-row" style="margin:0;cursor:pointer;">
+                <input type="checkbox" id="chkCreatorEnableCaptions" checked>
+                <span style="font-size:11.5px;color:#10B981;font-weight:600;">Enable Subtitles</span>
+              </label>
+            </div>
+            <span style="font-size:11px;color:#94A3B8;">Uncheck to export video without subtitles</span>
+          </div>
+
+          <!-- Controls Container (Toggled via checkbox) -->
+          <div id="creatorCaptionsControlsWrap">
+            <!-- Font Size & Position Control Row -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);margin-bottom:12px;">
+              <!-- Font Size Slider -->
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                  <label style="font-size:12px;color:#CBD5E1;font-weight:600;">🔤 Subtitle Font Size:</label>
+                  <strong id="lblCaptionFontSize" style="font-size:12px;color:#38BDF8;font-family:monospace;">24px</strong>
+                </div>
+                <input type="range" class="range-slider" id="sliderCaptionFontSize" min="16" max="48" value="24" step="1" style="width:100%;accent-color:#38BDF8;" title="Adjust caption font size">
+                <div style="display:flex;justify-content:space-between;font-size:10px;color:#64748B;margin-top:2px;">
+                  <span>16px (Small)</span>
+                  <span>24px (Standard)</span>
+                  <span>48px (Large)</span>
+                </div>
+              </div>
+
+              <!-- Screen Position Selector & Fine Slider -->
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                  <label style="font-size:12px;color:#CBD5E1;font-weight:600;">📍 Screen Position:</label>
+                  <strong id="lblCaptionPosV" style="font-size:12px;color:#FACC15;font-family:monospace;">86% (Bottom)</strong>
+                </div>
+                <div style="display:flex;gap:6px;margin-bottom:6px;">
+                  <button type="button" class="btn btn-xs btn-outline btn-caption-pos" id="btnCaptionPosTop" data-pos="16">Top (16%)</button>
+                  <button type="button" class="btn btn-xs btn-outline btn-caption-pos" id="btnCaptionPosCenter" data-pos="50">Center (50%)</button>
+                  <button type="button" class="btn btn-xs btn-primary btn-caption-pos active" id="btnCaptionPosBottom" data-pos="86">Bottom (86%)</button>
+                </div>
+                <input type="range" class="range-slider" id="sliderCaptionPosV" min="10" max="92" value="86" step="1" style="width:100%;accent-color:#FACC15;" title="Fine-tune vertical screen position percentage">
+              </div>
+            </div>
+
+            <!-- Tab Switching: Auto or File -->
+            <div style="display:flex;gap:8px;margin-bottom:12px;">
+              <button type="button" class="btn btn-sm btn-primary" id="tabCreatorAutoCaptions" style="border-radius:6px;">✨ Option 1: AI Auto-Generate Captions</button>
+              <button type="button" class="btn btn-sm btn-outline" id="tabCreatorImportCaptions" style="border-radius:6px;">📁 Option 2: Import Caption File (.srt / .vtt / .txt)</button>
+            </div>
+
+            <!-- Option 1 Pane: Auto-Generate -->
+            <div id="paneCreatorAutoCaptions" style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;border:1px solid #1E293B;">
+              <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:10px;">
+                <label style="font-size:12px;color:#CBD5E1;font-weight:600;">Caption Style Preset:</label>
+                <select id="selectCreatorCaptionStyle" class="search-input" style="width:280px;padding:6px 10px;font-size:12px;background:#0F172A;border-color:#475569;">
+                  <option value="BOLD_YELLOW" selected>🟡 Bold Yellow Pop (MrBeast / Viral)</option>
+                  <option value="KARAOKE">⚡ Viral Word Highlight (Alex Hormozi)</option>
+                  <option value="CLEAN_PILL">🔤 Clean Modern Pill (Netflix / Modern Sans)</option>
+                  <option value="CINEMATIC_SERIF">🎬 Cinematic Serif (Film & Doc)</option>
+                  <option value="NEON_CYAN">💎 Neon Cyan Glow (Cyber / Punchy)</option>
+                </select>
+                <button type="button" class="btn btn-sm btn-primary" id="btnCreatorGenerateCaptionsNow" style="background:#10B981;border-color:#059669;">
+                  ✨ Auto-Generate from Voiceover
+                </button>
+              </div>
+              <textarea id="txtCreatorScriptInput" class="search-input" style="width:100%;height:52px;resize:vertical;font-size:12px;background:#0F172A;border-color:#334155;color:#E2E8F0;padding:8px;" placeholder="Optional: Paste narration script here. Captions will automatically pace across your entire voiceover!"></textarea>
+              <div id="creatorCaptionsStatusText" style="font-size:11px;color:#10B981;margin-top:6px;"></div>
+            </div>
+
+            <!-- Option 2 Pane: Import File -->
+            <div id="paneCreatorImportCaptions" class="hidden" style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;border:1px solid #1E293B;">
+              <p style="font-size:12px;color:#94A3B8;margin:0 0 10px;">Upload an existing .SRT, .VTT, or plain text subtitle file. The system will parse timecodes and automatically arrange them on your timeline.</p>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <input type="file" id="fileCreatorSubtitleImport" accept=".srt,.vtt,.txt" style="display:none;">
+                <button type="button" class="btn btn-sm btn-outline" id="btnChooseSubtitleFile" style="background:#1E293B;color:#38BDF8;border-color:#38BDF8;">
+                  📄 Choose .SRT / .VTT / .TXT File
+                </button>
+                <span id="txtSubtitleFileName" style="font-size:12px;color:#E2E8F0;font-weight:500;">No file chosen</span>
+              </div>
+              <div id="creatorImportedCaptionsCount" style="font-size:11px;color:#38BDF8;margin-top:6px;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Step 3 Stepper Footer -->
+      <div class="creator-stepper-footer" style="margin-top:20px;">
+        <button class="btn btn-outline" id="btnStep3Back">← Back to Visual Scenes</button>
+        <div class="footer-nav-buttons" style="display:flex;gap:12px;">
+          <button class="btn btn-secondary btn-lg" id="btnZeroConfigAssembleBottom" style="background:rgba(99,102,241,0.2);border-color:#6366F1;color:#A5B4FC;">
+            <span>⚡ Magic Auto-Assemble</span>
+          </button>
+          <button class="btn btn-primary btn-lg" id="btnTriggerCreatorAutoEdit">
+            <span class="btn-sparkle">✨</span>
+            <span>Assemble Story Video ➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Realtime Review & Storyboard Deck -->
+    <div class="creator-card-box hidden" id="creatorStep4">
+      <div class="step-headline-wrap">
+        <h2>Step 4: Review Your Story Video</h2>
+        <p>Preview playback in real time with synchronized motion, subtitles, transitions, and audio.</p>
+      </div>
+
+      <div class="creator-preview-stage" id="creatorPreviewStage">
+        <!-- Permanent Program Monitor Canvas -->
+        <div class="canvas-aspect-box aspect-16-9" id="canvasAspectBox">
+          <canvas id="previewCanvas" width="1920" height="1080"></canvas>
+          <div class="caption-overlay" id="captionOverlay"></div>
+        </div>
+      </div>
+
+      <div class="creator-transport-bar">
+        <button class="t-btn" id="btnCreatorPlayPause" style="width:48px;height:48px;border-radius:50%;background:#6366F1;color:#FFF;font-size:18px;">▶</button>
+        <span id="creatorTimeDisplay" style="color:#CBD5E1;font-weight:600;font-size:14px;font-family:monospace;">00:00.0 / 00:30.0</span>
+      </div>
+
+      <!-- Dedicated Voiceover Audio Player Bar with Volume Control -->
+      <div class="creator-vo-review-bar" id="creatorVoiceoverReviewBar">
+        <div class="vo-review-header">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:14px;">🎙️</span>
+            <strong style="font-size:12px;color:#F8FAFC;">Voiceover Narration Track:</strong>
+            <span id="voReviewFilename" style="font-size:11.5px;color:#38BDF8;font-weight:600;">voiceover.mp3</span>
+            <span id="voReviewDurationBadge" class="guide-badge" style="background:rgba(99,102,241,0.15);color:#A5B4FC;border:1px solid rgba(99,102,241,0.3);font-size:10px;padding:1px 6px;border-radius:10px;">00:30.0</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:11.5px;color:#CBD5E1;font-weight:600;">Voiceover Volume:</span>
+            <input type="range" id="sliderVoReviewVolume" min="0" max="150" value="100" step="1" style="width:110px;accent-color:#10B981;" title="Increase or decrease voiceover volume">
+            <strong id="lblVoReviewVolume" style="font-size:11.5px;color:#10B981;font-family:monospace;min-width:38px;">100%</strong>
+          </div>
+        </div>
+        <div class="vo-review-timeline-row">
+          <button type="button" class="btn-icon-xs" id="btnVoReviewPlayPause" title="Play/Pause Voiceover Audio" style="width:28px;height:28px;border-radius:50%;background:#6366F1;color:#FFF;font-size:11px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">▶</button>
+          <div class="vo-progress-track" id="voProgressTrack" title="Click to seek voiceover position">
+            <div class="vo-progress-waveform" id="voProgressWaveform"></div>
+            <div class="vo-progress-fill" id="voProgressFill" style="width: 0%;"></div>
+            <div class="vo-progress-handle" id="voProgressHandle" style="left: 0%;"></div>
+          </div>
+          <span id="voReviewTimeDisplay" style="font-size:11.5px;color:#94A3B8;font-family:monospace;min-width:95px;text-align:right;">00:00.0 / 00:30.0</span>
+        </div>
+      </div>
+
+      <!-- Interactive Visual Storyboard Card Deck -->
+      <div class="creator-storyboard-section" id="creatorStoryboardSection">
+        <div class="storyboard-header">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:15px;">🎞️</span>
+            <h4 style="margin:0;font-size:13px;font-weight:700;color:#F8FAFC;letter-spacing:0.02em;">Scene Storyboard Flow (<span id="storyboardSceneCount">0 scenes</span>)</h4>
+          </div>
+          <div class="storyboard-controls" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-size:11px;color:#94A3B8;">Zoom:</span>
+              <input type="range" id="sliderStoryboardZoom" min="80" max="240" value="155" step="5" style="width:85px;accent-color:#6366F1;" title="Compress or Zoom Cards">
+              <span id="lblStoryboardZoom" style="font-size:11px;color:#CBD5E1;font-family:monospace;">155px</span>
+            </div>
+            <div class="btn-group" style="display:flex;gap:4px;">
+              <button type="button" class="btn btn-xs btn-primary" id="btnStoryboardDeckView" title="Horizontal Scrollable Deck">↔ Deck View</button>
+              <button type="button" class="btn btn-xs btn-outline" id="btnStoryboardGridView" title="View All Cards Simultaneously in Grid">▦ All Cards Grid</button>
+            </div>
+          </div>
+        </div>
+        <div class="creator-storyboard-deck" id="creatorStoryboardDeck">
+          <!-- Dynamically populated visual scene cards -->
+        </div>
+      </div>
+
+      <!-- Review & Editing Keyboard Tips -->
+      <div class="creator-review-tips-bar">
+        <span>⌨ <strong>Space:</strong> Play/Pause</span>
+        <span><strong>← / →:</strong> Step 1s</span>
+        <span><strong>F:</strong> Fullscreen</span>
+      </div>
+
+      <div class="creator-stepper-footer">
+        <button class="btn btn-secondary btn-lg" id="btnCreatorReassemble">← 🔄 Re-Assemble / Customize Directives</button>
+        <div class="footer-nav-buttons">
+          <button class="btn btn-primary btn-lg" id="btnStep4Next">Proceed to Export ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Export MP4 -->
+    <div class="creator-card-box hidden" id="creatorStep5">
+      <div class="step-headline-wrap">
+        <h2>Step 5: Export Master MP4 Video</h2>
+        <p>Render your final video using hardware acceleration with full audio mixing and burned subtitles.</p>
+      </div>
+
+      <div class="creator-export-summary">
+        <div class="summary-metric-card">
+          <span>Resolution</span>
+          <strong id="creatorExpRes">1080p Full HD</strong>
+        </div>
+        <div class="summary-metric-card">
+          <span>Estimated Duration</span>
+          <strong id="creatorExpDur">00:30.0</strong>
+        </div>
+        <div class="summary-metric-card">
+          <span>Target File Size</span>
+          <strong id="creatorExpSize">~45 MB</strong>
+        </div>
+      </div>
+
+      <!-- Export Presets Guide for Creators -->
+      <div class="creator-instruction-card export-instruct-card">
+        <div class="instruct-header">
+          <span class="instruct-icon">🚀</span>
+          <h4>Export Resolution Best Practices:</h4>
+        </div>
+        <p class="instruct-desc"><strong>1080p Full HD:</strong> Best for standard YouTube & Web. • <strong>4K Ultra HD:</strong> Maximum clarity for 4K displays. • <strong>9:16 Shorts/TikTok:</strong> Best for vertical mobile platforms. • <strong>Auto GPU:</strong> Uses your graphics card for up to 10x faster renders!</p>
+      </div>
+
+      <div class="form-row-2col">
+        <div class="form-item">
+          <label>Export Preset</label>
+          <select class="input-full" id="creatorSelectProfile">
+            <option value="1080p">YouTube Full HD (1080p, High Quality)</option>
+            <option value="4k">4K Ultra HD (3840x2160, Master)</option>
+            <option value="vertical_1080p">YouTube Shorts / TikTok (9:16 Vertical)</option>
+            <option value="720p">HD 720p (Fast Render)</option>
+          </select>
+        </div>
+        <div class="form-item">
+          <label>Hardware Acceleration</label>
+          <select class="input-full" id="creatorSelectHw">
+            <option value="auto">Auto (GPU AMF/NVENC/QSV with CPU Fallback)</option>
+            <option value="cpu">CPU Software (libx264 - Maximum Compatibility)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- CapCut In/Out Selection Range Option -->
+      <div class="creator-options-box hidden" id="boxCreatorInOutExport" style="margin: 12px 0; padding: 10px 14px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px;">
+        <label class="creator-checkbox-row" style="margin:0;">
+          <input type="checkbox" id="chkCreatorExportInOutOnly" checked>
+          <span><strong style="color:#38BDF8;">Export In/Out Marked Range Only:</strong> <span id="txtCreatorExportInOutRange">00:00 - 00:00</span>. (Uncheck to export complete timeline).</span>
+        </label>
+      </div>
+
+      <div class="creator-progress-box hidden" id="creatorRenderProgressBox">
+        <div style="display:flex;justify-content:space-between;color:#F8FAFC;font-size:13px;font-weight:600;">
+          <span id="creatorRenderStage">Rendering Video & Audio...</span>
+          <span id="creatorRenderPercent">0%</span>
+        </div>
+        <div class="creator-progress-bar">
+          <div class="creator-progress-fill" id="creatorRenderProgressFill"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;color:#94A3B8;font-size:11px;margin-top:6px;">
+          <span id="creatorRenderFps">0 FPS</span>
+          <span id="creatorRenderEta">ETA: calculating...</span>
+        </div>
+      </div>
+
+      <div class="creator-stepper-footer">
+        <button class="btn btn-outline" id="btnStep5Back">← Back</button>
+        <div class="footer-nav-buttons">
+          <button class="btn btn-primary btn-lg" id="btnCreatorStartExport">
+            <span>🚀 Render & Save Final MP4</span>
+          </button>
+          <a class="btn btn-success btn-lg hidden" id="btnCreatorDownloadMp4" download="Story_Video.mp4">
+            <span>💾 Download Finished MP4</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- TOAST NOTIFICATION CONTAINER                                 -->
+  <!-- ============================================================ -->
+  <div class="toast-notification-container" id="toastContainer"></div>
+
+  <!-- ============================================================ -->
+  <!-- CONTEXT MENU CONTAINER                                       -->
+  <!-- ============================================================ -->
+  <div class="context-menu hidden" id="timelineContextMenu">
+    <div class="menu-item" data-action="split">✂ Split at Playhead (S)</div>
+    <div class="menu-item" data-action="duplicate">⧉ Duplicate (Ctrl+D)</div>
+    <div class="menu-item text-danger" data-action="delete">🗑 Delete (Del)</div>
+    <div class="menu-divider"></div>
+    <div class="menu-item" data-action="motion">✦ Change Motion...</div>
+    <div class="menu-item" data-action="transition">⇄ Add Transition...</div>
+    <div class="menu-item" data-action="effects">◌ Add Effect Filter...</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PERFORMANCE & QUALITY POPOVER                                -->
+  <!-- ============================================================ -->
+  <div class="popover-card hidden" id="performancePopover">
+    <div class="popover-header">
+      <h5>System & Preview Diagnostics</h5>
+      <button class="popover-close-btn" id="btnClosePerfPopover">✕</button>
+    </div>
+    <div class="popover-body">
+      <div class="popover-metric"><span>CPU:</span><strong id="diagCpuText">AMD Ryzen / Multi-Core</strong></div>
+      <div class="popover-metric"><span>GPU:</span><strong id="diagGpuText">AMD Radeon Graphics</strong></div>
+      <div class="popover-metric"><span>RAM:</span><strong id="diagRamText">16 GB (Healthy)</strong></div>
+      <div class="popover-metric"><span>Preview FPS:</span><strong id="diagFpsText">60 FPS</strong></div>
+      <div class="popover-metric"><span>Encoder:</span><strong id="diagEncoderText">Hardware AMF / CPU Fallback</strong></div>
+      <div class="popover-divider"></div>
+      <div class="popover-control">
+        <label>Preview Quality:</label>
+        <select class="select-xs" id="selectPreviewQuality">
+          <option value="high">Full (1080p Quality)</option>
+          <option value="medium">Half (Faster Preview)</option>
+          <option value="low">Draft (Lowest CPU)</option>
+        </select>
+      </div>
+      <div class="popover-control mt-2">
+        <label>Proxy Mode:</label>
+        <select class="select-xs" id="selectProxyMode">
+          <option value="auto">Auto Performance Proxies</option>
+          <option value="off">Off (Original Files)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: AI ONE-CLICK AUTO EDIT WIZARD                         -->
+  <!-- ============================================================ -->
+  <div class="modal-backdrop hidden" id="modalAutoEdit">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <div class="head-title">
+          <span class="sparkle-icon">✨</span>
+          <h3>AI Storytelling Video Assembly</h3>
+        </div>
+        <button class="modal-close-icon" id="btnCloseAutoEditModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <p class="modal-lead-text">MAQ Auto Editor Ultra will automatically pace your clips according to timestamps, apply smooth cinematic motion, add contextual sound effects, prioritize voiceover ducking, and burn styled captions.</p>
+
+        <label class="section-subhead">Select Storytelling Style Preset:</label>
+        <div class="style-choice-grid">
+          <div class="choice-preset-card active" data-preset="CINEMATIC">
+            <div class="choice-title">Cinematic Storytelling</div>
+            <div class="choice-desc">Subtle slow push/pull, warm color grading, gentle crossfades, conservative SFX, serif subtitles.</div>
+          </div>
+          <div class="choice-preset-card" data-preset="DYNAMIC_STORY">
+            <div class="choice-title">Dynamic Storyteller</div>
+            <div class="choice-desc">Punchy zooms, quick slides, bold yellow pop subtitles, high energy sound effect cues.</div>
+          </div>
+          <div class="choice-preset-card" data-preset="DOCUMENTARY">
+            <div class="choice-title">Historical Documentary</div>
+            <div class="choice-desc">Ken Burns diagonal panning, classic dissolves, documentary lower-third subtitle bar.</div>
+          </div>
+          <div class="choice-preset-card" data-preset="MINIMAL">
+            <div class="choice-title">Clean Minimalist</div>
+            <div class="choice-desc">Zero clutter, crisp straight cuts, clean white subtitles, voiceover clarity focus.</div>
+          </div>
+        </div>
+
+        <!-- Step-by-Step AI Progress Visualizer -->
+        <div class="ai-progress-box hidden" id="aiProgressBox">
+          <div class="ai-step-row" id="step1"><span class="step-icon">●</span><span>1. Analyzing imported media & timestamps</span></div>
+          <div class="ai-step-row" id="step2"><span class="step-icon">○</span><span>2. Pacing non-overlapping timeline clips</span></div>
+          <div class="ai-step-row" id="step3"><span class="step-icon">○</span><span>3. Applying subtle Ken Burns & camera motion</span></div>
+          <div class="ai-step-row" id="step4"><span class="step-icon">○</span><span>4. Matching context-sensitive sound effects</span></div>
+          <div class="ai-step-row" id="step5"><span class="step-icon">○</span><span>5. Synchronizing voiceover & audio ducking</span></div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" id="btnCancelAutoEditModal">Cancel</button>
+        <button class="btn btn-primary" id="btnExecuteAutoEditWorkflow">⚡ Generate AI Video</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: EXPORT MP4 MASTER RENDER DIALOG                       -->
+  <!-- ============================================================ -->
+  <div class="modal-backdrop hidden" id="modalExport">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h3>Export Master Video (MP4)</h3>
+        <button class="modal-close-icon" id="btnCloseExportModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <div class="form-row-2col">
+          <div class="form-item">
+            <label>Output Resolution</label>
+            <select class="input-full" id="exportResolutionSelect">
+              <option value="1080p">1080p Full HD (1920x1080)</option>
+              <option value="1440p">1440p 2K QHD (2560x1440)</option>
+              <option value="4k">4K Ultra HD (3840x2160)</option>
+              <option value="720p">720p HD (1280x720)</option>
+              <option value="vertical_1080p">9:16 Vertical Shorts (1080x1920)</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label>Frame Rate (FPS)</label>
+            <select class="input-full" id="exportFpsSelect">
+              <option value="30">30 FPS (Standard)</option>
+              <option value="60">60 FPS (Ultra Smooth)</option>
+              <option value="24">24 FPS (Cinematic)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2col mt-3">
+          <div class="form-item">
+            <label>Video Codec</label>
+            <select class="input-full" id="exportCodecSelect">
+              <option value="h264">H.264 / AVC (Maximum Compatibility)</option>
+              <option value="hevc">H.265 / HEVC (High Efficiency)</option>
+              <option value="av1">AV1 (Next-Gen Open Codec)</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label>Quality Preset</label>
+            <select class="input-full" id="exportQualitySelect">
+              <option value="balanced">Balanced (High Quality / Fast)</option>
+              <option value="high_quality">High Quality (Visually Lossless)</option>
+              <option value="small_file">Small File Size</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Render Live Progress Area (Revealed during rendering) -->
+        <div class="render-execution-box hidden" id="renderExecutionBox">
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-inner" id="renderProgressBar" style="width: 0%;"></div>
+          </div>
+          <div class="render-stat-grid mt-3">
+            <div>Stage: <strong id="lblRenderStage">Initializing...</strong></div>
+            <div>Progress: <strong id="lblRenderPercent">0%</strong></div>
+            <div>Frame: <strong id="lblRenderFrame">0 / 900</strong></div>
+            <div>FPS: <strong id="lblRenderFps">0</strong></div>
+            <div>Elapsed: <strong id="lblRenderElapsed">00:00</strong></div>
+            <div>ETA: <strong id="lblRenderRemaining">Calculating...</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" id="btnCancelRenderAction">Cancel</button>
+        <button class="btn btn-primary" id="btnStartExportNow">Render Video Now</button>
+        <button class="btn btn-primary hidden" id="btnOpenExportedFolder">Open Exports Folder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: KEYBOARD SHORTCUTS REFERENCE CHEAT SHEET              -->
+  <!-- ============================================================ -->
+  <div class="modal-backdrop hidden" id="modalShortcuts">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h3>Keyboard Shortcuts</h3>
+        <button class="modal-close-icon" id="btnCloseShortcutsModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <div class="shortcut-list">
+          <div class="shortcut-row"><kbd>Space</kbd><span>Play / Pause Preview</span></div>
+          <div class="shortcut-row"><kbd>I</kbd><span>Mark In Point (CapCut In Range)</span></div>
+          <div class="shortcut-row"><kbd>O</kbd><span>Mark Out Point (CapCut Out Range)</span></div>
+          <div class="shortcut-row"><kbd>X</kbd> / <kbd>Alt + X</kbd><span>Clear In / Out Selection Range</span></div>
+          <div class="shortcut-row"><kbd>S</kbd><span>Split Selected Clip at Playhead</span></div>
+          <div class="shortcut-row"><kbd>Del</kbd> / <kbd>Backspace</kbd><span>Delete Selected Clip</span></div>
+          <div class="shortcut-row"><kbd>Ctrl + Z</kbd><span>Undo Last Action</span></div>
+          <div class="shortcut-row"><kbd>Ctrl + Shift + Z</kbd><span>Redo Action</span></div>
+          <div class="shortcut-row"><kbd>Ctrl + S</kbd><span>Save Project (.maqp)</span></div>
+          <div class="shortcut-row"><kbd>Ctrl + E</kbd><span>Export Video (MP4)</span></div>
+          <div class="shortcut-row"><kbd>←</kbd> / <kbd>→</kbd><span>Step Backward / Forward 1 Second</span></div>
+          <div class="shortcut-row"><kbd>Home</kbd> / <kbd>End</kbd><span>Jump to Beginning / End of Timeline</span></div>
+          <div class="shortcut-row"><kbd>Ctrl + Wheel</kbd><span>Zoom Timeline In / Out</span></div>
+          <div class="shortcut-row"><kbd>F</kbd><span>Toggle Fullscreen Preview</span></div>
+          <div class="shortcut-row"><kbd>M</kbd><span>Toggle Creator Mode vs Pro Mode</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: CONTENT CREATOR QUICK REFERENCE GUIDE                 -->
+  <!-- ============================================================ -->
+  <div class="modal-backdrop hidden" id="modalCreatorGuide">
+    <div class="modal-dialog modal-dialog-lg">
+      <div class="modal-head">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">📖</span>
+          <h3>Content Creator Quick Reference Manual</h3>
+        </div>
+        <button class="modal-close-icon" id="btnCloseCreatorGuideModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <div class="guide-modal-section">
+          <h4>1. Image Naming Cheat Sheet (Automatic Timeline Sync)</h4>
+          <p>Prefixing filenames with timestamps gives you instant, frame-perfect synchronization with zero manual dragging:</p>
+          <div class="naming-table-wrap">
+            <table class="guide-table">
+              <thead>
+                <tr>
+                  <th>Filename Example</th>
+                  <th>Timeline Position</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>0-00.png</code> / <code>0-03.png</code></td>
+                  <td>Starts at 00:00 or 00:03</td>
+                  <td>Intro hook / Title scene</td>
+                </tr>
+                <tr>
+                  <td><code>0-15.png</code> / <code>0-28.jpg</code></td>
+                  <td>Starts at 00:15 or 00:28</td>
+                  <td>Story development / Key points</td>
+                </tr>
+                <tr>
+                  <td><code>1-05.png</code> / <code>2-20.webp</code></td>
+                  <td>Starts at 01:05 or 02:20</td>
+                  <td>Longer multi-minute narratives</td>
+                </tr>
+                <tr>
+                  <td><code>scene_01.png</code>, <code>scene_02.png</code></td>
+                  <td>Evenly Auto-Paced (~4.5s)</td>
+                  <td>Sequential storyboard scenes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="guide-modal-section">
+          <h4>2. Recommended Video Formats & Dimensions</h4>
+          <div class="guide-specs-grid">
+            <div class="guide-spec-box">
+              <strong>16:9 Landscape (1920x1080 or 4K)</strong>
+              <span>Ideal for standard YouTube, documentaries, video essays, and desktop viewing.</span>
+            </div>
+            <div class="guide-spec-box">
+              <strong>9:16 Vertical (1080x1920)</strong>
+              <span>Ideal for YouTube Shorts, Instagram Reels, and TikTok videos.</span>
+            </div>
+            <div class="guide-spec-box">
+              <strong>PNG vs JPG vs WebP</strong>
+              <span>PNG is best for images with text and line art; JPG and WebP are best for photographic realism.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-modal-section">
+          <h4>3. Audio & Smart Music Ducking</h4>
+          <p>When you enable <strong>Background Music with Dynamic Ducking</strong>, the audio engine automatically lowers the background music volume by <strong>-18 dB</strong> whenever speech is present, ensuring your voiceover remains crisp, clear, and professional without manual volume automation.</p>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-primary" id="btnCloseCreatorGuideBtn">Got It, Let's Create!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: Interactive Scene Card Editor Modal -->
+  <div class="modal-backdrop hidden" id="modalCardSceneEditor">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🎞️</span>
+          <h3 id="modalSceneEditorTitle">Edit Scene Card</h3>
+        </div>
+        <button class="modal-close-icon" id="btnCloseSceneEditorModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <div style="display:flex;gap:14px;margin-bottom:14px;background:#0F172A;padding:12px;border-radius:8px;border:1px solid #1E293B;align-items:center;">
+          <div style="width:110px;height:65px;border-radius:6px;overflow:hidden;background:#020617;flex-shrink:0;">
+            <img id="sceneEditorThumb" src="" alt="Thumbnail" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="flex:1;min-width:0;">
+            <strong id="sceneEditorFilename" style="color:#F8FAFC;font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">clip.png</strong>
+            <span id="sceneEditorTimingLabel" style="font-size:11px;color:#94A3B8;display:block;margin-top:2px;">Time: 00:00.0 - 00:04.5</span>
+            <span id="sceneEditorCaptionSnippet" style="font-size:11px;color:#38BDF8;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:12px;">
+          <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:5px;">Camera Motion:</label>
+          <select id="selectSceneMotion" class="search-input" style="width:100%;padding:8px 10px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:6px;">
+            <option value="SLOW_PUSH">🔍+ Slow Push In</option>
+            <option value="SLOW_PULL">🔍- Slow Pull Out</option>
+            <option value="KEN_BURNS_TL_BR">↘ Ken Burns (TL ➔ BR)</option>
+            <option value="KEN_BURNS_BR_TL">↖ Ken Burns (BR ➔ TL)</option>
+            <option value="ORBIT_DRIFT">💫 Cinematic Orbit Drift</option>
+            <option value="DIAGONAL_FLOAT">↗ Diagonal Float</option>
+            <option value="PAN_LEFT">← Pan Left</option>
+            <option value="PAN_RIGHT">→ Pan Right</option>
+            <option value="CENTER_PUNCH">🎯 Dynamic Punch</option>
+            <option value="DRAMATIC_ZOOM">⚡ Impact Zoom</option>
+            <option value="NONE">⏹ Static (No Motion)</option>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div class="form-group">
+            <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:5px;">Scene Duration (seconds):</label>
+            <input type="number" id="inputSceneDuration" step="0.1" min="0.5" max="60.0" value="4.5" class="search-input" style="width:100%;padding:8px 10px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:6px;">
+          </div>
+          <div class="form-group">
+            <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:5px;">Motion Intensity:</label>
+            <select id="selectSceneIntensity" class="search-input" style="width:100%;padding:8px 10px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:6px;">
+              <option value="0.10">Subtle (10%)</option>
+              <option value="0.15" selected>Moderate (15%)</option>
+              <option value="0.25">Pronounced (25%)</option>
+              <option value="0.35">Dynamic Punch (35%)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background:rgba(0,0,0,0.25);padding:12px;border-radius:8px;border:1px solid #1E293B;margin-bottom:14px;">
+          <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:8px;">Reorder & Scene Actions:</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-sm btn-outline" id="btnSceneMoveLeft" style="flex:1;">◀ Move Earlier</button>
+            <button type="button" class="btn btn-sm btn-outline" id="btnSceneMoveRight" style="flex:1;">Move Later ▶</button>
+            <button type="button" class="btn btn-sm btn-outline" id="btnSceneDelete" style="color:#EF4444;border-color:#EF4444;">🗑 Delete Scene</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot" style="display:flex;justify-content:space-between;">
+        <button class="btn btn-outline" id="btnCloseSceneEditor">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveSceneEditor">💾 Apply Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: Interactive Transition Picker Modal -->
+  <div class="modal-backdrop hidden" id="modalTransitionPicker">
+    <div class="modal-dialog" style="max-width:460px;">
+      <div class="modal-head">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">⚡</span>
+          <h3 id="modalTransPickerTitle">Customize Scene Transition</h3>
+        </div>
+        <button class="modal-close-icon" id="btnCloseTransitionPickerModal">✕</button>
+      </div>
+      <div class="modal-content-scroll">
+        <p style="font-size:12px;color:#94A3B8;margin-top:0;margin-bottom:12px;" id="lblTransPickerSceneDesc">Choose transition effect and duration connecting these two scenes.</p>
+
+        <div class="form-group" style="margin-bottom:12px;">
+          <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:6px;">Transition Effect:</label>
+          <select id="selectPickerTransType" class="search-input" style="width:100%;padding:8px 10px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:6px;">
+            <option value="CUT">✂ Hard Cut (No Overlap)</option>
+            <option value="FADE">◐ Cross Dissolve</option>
+            <option value="DISSOLVE">◌ Smooth Dissolve</option>
+            <option value="SMOOTH_ZOOM">🔎 Zoom In Transition</option>
+            <option value="ZOOM_OUT">🔍 Zoom Out Transition</option>
+            <option value="SMOOTH_LEFT">⇠ Smooth Slide Left</option>
+            <option value="SMOOTH_RIGHT">⇢ Smooth Slide Right</option>
+            <option value="SLIDE_LEFT">← Slide Left</option>
+            <option value="SLIDE_RIGHT">→ Slide Right</option>
+            <option value="SLIDE_UP">⇡ Slide Up</option>
+            <option value="SLIDE_DOWN">⇣ Slide Down</option>
+            <option value="WIPE_LEFT">◀ Wipe Left</option>
+            <option value="WIPE_RIGHT">▶ Wipe Right</option>
+            <option value="DIP_BLACK">⬛ Dip to Black</option>
+            <option value="DIP_WHITE">⬜ Dip to White</option>
+            <option value="CIRCLE_OPEN">◯ Iris Circle Open</option>
+            <option value="CIRCLE_CLOSE">⬤ Iris Circle Close</option>
+            <option value="RADIAL">⏱ Clock Radial Wipe</option>
+            <option value="PIXELIZE">▦ Digital Pixelize</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-size:12px;color:#CBD5E1;font-weight:700;display:block;margin-bottom:6px;">Transition Duration (seconds):</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="number" id="inputPickerTransDuration" step="0.1" min="0.1" max="2.0" value="0.5" class="search-input" style="width:120px;padding:8px 10px;font-size:12.5px;background:#0F172A;border-color:#334155;border-radius:6px;">
+            <div style="display:flex;gap:4px;">
+              <button type="button" class="btn btn-sm btn-outline btn-quick-trans-dur" data-dur="0.3">0.3s</button>
+              <button type="button" class="btn btn-sm btn-outline btn-quick-trans-dur" data-dur="0.5">0.5s</button>
+              <button type="button" class="btn btn-sm btn-outline btn-quick-trans-dur" data-dur="0.8">0.8s</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <button type="button" class="btn btn-sm btn-outline" id="btnPickerApplyAll" style="color:#38BDF8;border-color:#38BDF8;">🌐 Apply to All Scenes</button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline" id="btnCloseTransitionPicker">Cancel</button>
+          <button class="btn btn-primary" id="btnPickerApplySingle">Apply Transition</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden File Input Triggers -->
+  <input type="file" id="inputTriggerVoiceover" accept="audio/*" class="file-input-hidden">
+  <input type="file" id="inputTriggerImages" accept="image/*,video/*,.zip" multiple class="file-input-hidden">
+  <input type="file" id="inputTriggerFolder" webkitdirectory directory multiple class="file-input-hidden">
+  <input type="file" id="inputTriggerTranscript" accept=".srt,.vtt,.txt" class="file-input-hidden">
+  <input type="file" id="inputTriggerMaqflowZip" accept=".zip" class="file-input-hidden">
+
+  <!-- Core JavaScript Modules -->
+  <script src="/shared/constants.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/state/project-state.js"></script>
+  <script src="/js/state/timeline-state.js"></script>
+  <script src="/js/components/preview-engine.js"></script>
+  <script src="/js/components/timeline.js"></script>
+  <script src="/js/components/inspector.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

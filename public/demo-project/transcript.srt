@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:03,000
+Welcome to the functional scale engineering workshop.
+
+2
+00:00:03,000 --> 00:00:07,000
+It all began with an archive of original 1931 blueprints.
+
+3
+00:00:07,000 --> 00:00:12,000
+Every single component was machined from solid aerospace-grade alloy.
+
+4
+00:00:12,000 --> 00:00:18,000
+The custom handcrafted engine produces real combustion power.
+
+5
+00:00:18,000 --> 00:00:24,000
+Testing the vehicle on the track proved the suspension and chassis rigidity.
+
+6
+00:00:24,000 --> 00:00:30,000
+A breathtaking tribute to historic automotive craftsmanship.

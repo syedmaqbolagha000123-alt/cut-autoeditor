@@ -30,7 +30,9 @@ const logger = new Logger('Server');
 
 const PORT = process.env.PORT || 4000;
 const ROOT_DIR = path.join(__dirname, '..');
-const FRONTEND_DIR = path.join(ROOT_DIR, 'frontend');
+const FRONTEND_DIR = fs.existsSync(path.join(ROOT_DIR, 'public'))
+  ? path.join(ROOT_DIR, 'public')
+  : path.join(ROOT_DIR, 'frontend');
 
 // MIME Types Map
 const MIME_TYPES = {
