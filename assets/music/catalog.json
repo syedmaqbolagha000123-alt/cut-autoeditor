@@ -1,0 +1,74 @@
+[
+  {
+    "id": "bgm_1",
+    "filename": "cinematic_ambient_01.mp3",
+    "title": "Cinematic Majesty",
+    "mood": "Cinematic",
+    "duration": 30.0,
+    "bpm": 90,
+    "relPath": "assets/music/cinematic_ambient_01.mp3"
+  },
+  {
+    "id": "bgm_2",
+    "filename": "suspense_pulse_01.mp3",
+    "title": "Dark Investigation",
+    "mood": "Suspense",
+    "duration": 30.0,
+    "bpm": 110,
+    "relPath": "assets/music/suspense_pulse_01.mp3"
+  },
+  {
+    "id": "bgm_3",
+    "filename": "calm_story_01.mp3",
+    "title": "Reflective Journey",
+    "mood": "Calm",
+    "duration": 30.0,
+    "bpm": 80,
+    "relPath": "assets/music/calm_story_01.mp3"
+  },
+  {
+    "id": "bgm_4",
+    "filename": "emotional_piano_01.mp3",
+    "title": "Nostalgic Memories",
+    "mood": "Emotional",
+    "duration": 30.0,
+    "bpm": 72,
+    "relPath": "assets/music/emotional_piano_01.mp3"
+  },
+  {
+    "id": "bgm_5",
+    "filename": "corporate_tech_01.mp3",
+    "title": "Modern Innovation",
+    "mood": "Corporate",
+    "duration": 30.0,
+    "bpm": 120,
+    "relPath": "assets/music/corporate_tech_01.mp3"
+  },
+  {
+    "id": "bgm_6",
+    "filename": "documentary_historic_01.mp3",
+    "title": "Archive Chronology",
+    "mood": "Documentary",
+    "duration": 30.0,
+    "bpm": 78,
+    "relPath": "assets/music/documentary_historic_01.mp3"
+  },
+  {
+    "id": "bgm_7",
+    "filename": "energetic_beat_01.mp3",
+    "title": "Dynamic Drive",
+    "mood": "Energetic",
+    "duration": 30.0,
+    "bpm": 128,
+    "relPath": "assets/music/energetic_beat_01.mp3"
+  },
+  {
+    "id": "bgm_8",
+    "filename": "cyberpunk_synth_01.mp3",
+    "title": "Synthetic Horizon",
+    "mood": "Technology",
+    "duration": 30.0,
+    "bpm": 115,
+    "relPath": "assets/music/cyberpunk_synth_01.mp3"
+  }
+]

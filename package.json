@@ -1,0 +1,28 @@
+{
+  "name": "maq-auto-editor-ultra",
+  "version": "1.0.0",
+  "description": "Local automated storytelling video editor with timestamped timeline construction, smart motion, conservative SFX, audio ducking, subtitle burning, and realistic video compression.",
+  "main": "launcher.js",
+  "scripts": {
+    "start": "node launcher.js",
+    "test": "node tests/test-runner.js",
+    "generate-demo": "python3 scripts/generate_sample_assets.py",
+    "pack:zip": "node packaging/package-release.js"
+  },
+  "keywords": [
+    "video-editor",
+    "maqflow",
+    "automated-timeline",
+    "ffmpeg",
+    "storytelling",
+    "compression",
+    "subtitles",
+    "sfx-ducking"
+  ],
+  "author": "MAQ Ultra Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.11.0"
+  },
+  "devDependencies": {}
+}

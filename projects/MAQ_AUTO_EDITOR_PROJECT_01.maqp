@@ -1,0 +1,561 @@
+{
+  "version": "1.0.0",
+  "id": "proj_1788515060701_q3s258",
+  "name": "MAQ AUTO EDITOR PROJECT 01",
+  "createdAt": "2026-09-04T09:44:20.701Z",
+  "updatedAt": "2026-09-04T09:50:20.043Z",
+  "preset": "CINEMATIC",
+  "voiceover": {
+    "filename": "Imagine stepping into an ancient city at sunrise.The streets are already alive. Merchants open their.mp3",
+    "path": "D:\\PROJECT\\projects\\media\\Imagine_stepping_into_an_ancient_city_at_sunrise.The_streets_are_already_alive._Merchants_open_their_2.mp3",
+    "duration": 43.6,
+    "isBlob": false,
+    "_file": {}
+  },
+  "voiceoverDuration": 43.6,
+  "imageAssets": [
+    {
+      "id": "asset_1788514989412_0_qh9s",
+      "filename": "0-03.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-03_2.jpg",
+      "timestampSeconds": 3,
+      "displayTimestamp": "00:03",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989413_1_on2n",
+      "filename": "0-07.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-07_2.jpg",
+      "timestampSeconds": 7,
+      "displayTimestamp": "00:07",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989414_2_lqax",
+      "filename": "0-12.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-12_2.jpg",
+      "timestampSeconds": 12,
+      "displayTimestamp": "00:12",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989414_3_37ci",
+      "filename": "0-15.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-15_2.jpg",
+      "timestampSeconds": 15,
+      "displayTimestamp": "00:15",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989415_4_gtxf",
+      "filename": "0-20.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-20_2.jpg",
+      "timestampSeconds": 20,
+      "displayTimestamp": "00:20",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989416_5_0ale",
+      "filename": "0-25.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-25_2.jpg",
+      "timestampSeconds": 25,
+      "displayTimestamp": "00:25",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989417_6_s3nq",
+      "filename": "0-30.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-30_2.jpg",
+      "timestampSeconds": 30,
+      "displayTimestamp": "00:30",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989418_7_s8ev",
+      "filename": "0-35.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-35_2.jpg",
+      "timestampSeconds": 35,
+      "displayTimestamp": "00:35",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989418_8_7h0p",
+      "filename": "0-40.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-40_2.jpg",
+      "timestampSeconds": 40,
+      "displayTimestamp": "00:40",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    },
+    {
+      "id": "asset_1788514989419_9_t4od",
+      "filename": "0-45.jpg",
+      "path": "D:\\PROJECT\\projects\\media\\0-45_2.jpg",
+      "timestampSeconds": 45,
+      "displayTimestamp": "00:45",
+      "outputIndex": 1,
+      "mediaType": "image/jpeg",
+      "isBlob": false,
+      "_file": {}
+    }
+  ],
+  "timeline": {
+    "videoClips": [
+      {
+        "id": "clip_1788515060696_0_5pz6",
+        "assetId": "asset_1788514989412_0_qh9s",
+        "path": "D:\\PROJECT\\projects\\media\\0-03_2.jpg",
+        "filename": "0-03.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 0,
+        "duration": 7,
+        "endTime": 7,
+        "originalTimestamp": 3,
+        "displayTimestamp": "00:03",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "SLOW_PUSH",
+          "startScale": 1,
+          "endScale": 1.15,
+          "startPos": [
+            0.5,
+            0.5
+          ],
+          "endPos": [
+            0.5,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "CUT",
+          "duration": 0,
+          "reason": "Opening scene"
+        }
+      },
+      {
+        "id": "clip_1788515060697_1_h7ai",
+        "assetId": "asset_1788514989413_1_on2n",
+        "path": "D:\\PROJECT\\projects\\media\\0-07_2.jpg",
+        "filename": "0-07.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 7,
+        "duration": 5,
+        "endTime": 12,
+        "originalTimestamp": 7,
+        "displayTimestamp": "00:07",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "KEN_BURNS_TL_BR",
+          "startScale": 1.05,
+          "endScale": 1.22,
+          "startPos": [
+            0.35,
+            0.35
+          ],
+          "endPos": [
+            0.65,
+            0.65
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "FADE",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_2_iwu5",
+        "assetId": "asset_1788514989414_2_lqax",
+        "path": "D:\\PROJECT\\projects\\media\\0-12_2.jpg",
+        "filename": "0-12.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 12,
+        "duration": 3,
+        "endTime": 15,
+        "originalTimestamp": 12,
+        "displayTimestamp": "00:12",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "SLOW_PULL",
+          "startScale": 1.15,
+          "endScale": 1,
+          "startPos": [
+            0.5,
+            0.5
+          ],
+          "endPos": [
+            0.5,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "SMOOTH_ZOOM",
+          "duration": 0.36,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_3_gf0b",
+        "assetId": "asset_1788514989414_3_37ci",
+        "path": "D:\\PROJECT\\projects\\media\\0-15_2.jpg",
+        "filename": "0-15.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 15,
+        "duration": 5,
+        "endTime": 20,
+        "originalTimestamp": 15,
+        "displayTimestamp": "00:15",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "KEN_BURNS_BR_TL",
+          "startScale": 1.22,
+          "endScale": 1.05,
+          "startPos": [
+            0.65,
+            0.65
+          ],
+          "endPos": [
+            0.35,
+            0.35
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "SLIDE_LEFT",
+          "duration": 0.36,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_4_pmff",
+        "assetId": "asset_1788514989415_4_gtxf",
+        "path": "D:\\PROJECT\\projects\\media\\0-20_2.jpg",
+        "filename": "0-20.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 20,
+        "duration": 5,
+        "endTime": 25,
+        "originalTimestamp": 20,
+        "displayTimestamp": "00:20",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "PAN_RIGHT",
+          "startScale": 1.15,
+          "endScale": 1.15,
+          "startPos": [
+            0.35,
+            0.5
+          ],
+          "endPos": [
+            0.65,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "WIPE_LEFT",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_5_dylz",
+        "assetId": "asset_1788514989416_5_0ale",
+        "path": "D:\\PROJECT\\projects\\media\\0-25_2.jpg",
+        "filename": "0-25.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 25,
+        "duration": 5,
+        "endTime": 30,
+        "originalTimestamp": 25,
+        "displayTimestamp": "00:25",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "PAN_LEFT",
+          "startScale": 1.15,
+          "endScale": 1.15,
+          "startPos": [
+            0.65,
+            0.5
+          ],
+          "endPos": [
+            0.35,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "DISSOLVE",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_6_2kqs",
+        "assetId": "asset_1788514989417_6_s3nq",
+        "path": "D:\\PROJECT\\projects\\media\\0-30_2.jpg",
+        "filename": "0-30.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 30,
+        "duration": 5,
+        "endTime": 35,
+        "originalTimestamp": 30,
+        "displayTimestamp": "00:30",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "SLOW_PUSH",
+          "startScale": 1,
+          "endScale": 1.15,
+          "startPos": [
+            0.5,
+            0.5
+          ],
+          "endPos": [
+            0.5,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "DISSOLVE",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_7_annn",
+        "assetId": "asset_1788514989418_7_s8ev",
+        "path": "D:\\PROJECT\\projects\\media\\0-35_2.jpg",
+        "filename": "0-35.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 35,
+        "duration": 3.1,
+        "endTime": 38.1,
+        "originalTimestamp": 35,
+        "displayTimestamp": "00:35",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "KEN_BURNS_TL_BR",
+          "startScale": 1.05,
+          "endScale": 1.22,
+          "startPos": [
+            0.35,
+            0.35
+          ],
+          "endPos": [
+            0.65,
+            0.65
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "FADE",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_8_otvj",
+        "assetId": "asset_1788514989418_8_7h0p",
+        "path": "D:\\PROJECT\\projects\\media\\0-40_2.jpg",
+        "filename": "0-40.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 38.1,
+        "duration": 3.5,
+        "endTime": 41.6,
+        "originalTimestamp": 40,
+        "displayTimestamp": "00:40",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "SLOW_PULL",
+          "startScale": 1.15,
+          "endScale": 1,
+          "startPos": [
+            0.5,
+            0.5
+          ],
+          "endPos": [
+            0.5,
+            0.5
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "SMOOTH_ZOOM",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      },
+      {
+        "id": "clip_1788515060697_9_8zy1",
+        "assetId": "asset_1788514989419_9_t4od",
+        "path": "D:\\PROJECT\\projects\\media\\0-45_2.jpg",
+        "filename": "0-45.jpg",
+        "mediaType": "image/jpeg",
+        "startTime": 41.6,
+        "duration": 2.05,
+        "endTime": 43.65,
+        "originalTimestamp": 45,
+        "displayTimestamp": "00:45",
+        "outputIndex": 1,
+        "prompt": null,
+        "motion": {
+          "preset": "KEN_BURNS_BR_TL",
+          "startScale": 1.22,
+          "endScale": 1.05,
+          "startPos": [
+            0.65,
+            0.65
+          ],
+          "endPos": [
+            0.35,
+            0.35
+          ],
+          "intensity": 0.12,
+          "easing": "ease_in_out"
+        },
+        "effects": {
+          "brightness": 0.01,
+          "contrast": 1.18,
+          "saturation": 1.2,
+          "blur": 0,
+          "vignette": 0.3
+        },
+        "transition": {
+          "type": "SLIDE_LEFT",
+          "duration": 0.45,
+          "reason": "Seamless cinematic transition between scenes"
+        }
+      }
+    ],
+    "captions": [],
+    "textOverlays": [],
+    "sfxClips": [],
+    "musicClips": []
+  },
+  "audioSettings": {
+    "duckingStrengthDB": -18,
+    "voiceoverVolume": 1,
+    "musicVolume": 0.35,
+    "sfxVolume": 0.75
+  },
+  "captionStyle": "BOLD_YELLOW",
+  "exportSettings": {
+    "resolution": "1080p",
+    "fps": 30,
+    "codec": "h264",
+    "quality": "balanced",
+    "audioBitrate": "128k",
+    "useHardwareAcceleration": true
+  }
+}

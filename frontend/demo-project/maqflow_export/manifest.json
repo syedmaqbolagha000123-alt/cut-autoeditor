@@ -1,0 +1,62 @@
+{
+  "version": "3.1.0",
+  "generator": "MAQFLOW ULTRA Chrome Extension",
+  "timestamp": "2026-08-31T12:00:00Z",
+  "project": "MAQ AUTO EDITOR PROJECT 01",
+  "scenes": [
+    {
+      "sceneNumber": 1,
+      "timestamp": "0-03",
+      "timestampSeconds": 3,
+      "outputIndex": 1,
+      "prompt": "Cinematic shot of classic garage workshop door opening with dust in the sunbeams",
+      "filename": "images/0-03.png",
+      "mediaType": "image/png"
+    },
+    {
+      "sceneNumber": 2,
+      "timestamp": "0-07",
+      "timestampSeconds": 7,
+      "outputIndex": 1,
+      "prompt": "Vintage 1931 blueprint archive macro focus on technical schematics and measurements",
+      "filename": "images/0-07.png",
+      "mediaType": "image/png"
+    },
+    {
+      "sceneNumber": 3,
+      "timestamp": "0-12",
+      "timestampSeconds": 12,
+      "outputIndex": 1,
+      "prompt": "Engineer footsteps approaching lathe machine precision machining automotive components",
+      "filename": "images/0-12.png",
+      "mediaType": "image/png"
+    },
+    {
+      "sceneNumber": 4,
+      "timestamp": "0-18",
+      "timestampSeconds": 18,
+      "outputIndex": 1,
+      "prompt": "Close-up of miniature 1:3 scale engine block exhaust and thunderous mechanical ignition",
+      "filename": "images/0-18.png",
+      "mediaType": "image/png"
+    },
+    {
+      "sceneNumber": 5,
+      "timestamp": "0-24",
+      "timestampSeconds": 24,
+      "outputIndex": 1,
+      "prompt": "Scale model car driving and accelerating down a private asphalt test track",
+      "filename": "images/0-24.png",
+      "mediaType": "image/png"
+    },
+    {
+      "sceneNumber": 6,
+      "timestamp": "0-30",
+      "timestampSeconds": 30,
+      "outputIndex": 1,
+      "prompt": "Hero dramatic cinematic studio shot of the completed 1:3 scale masterpiece",
+      "filename": "images/0-30.png",
+      "mediaType": "image/png"
+    }
+  ]
+}

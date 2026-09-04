@@ -1,0 +1,296 @@
+{
+  "version": "1.0.0",
+  "id": "proj_demo_01",
+  "name": "MAQ AUTO EDITOR PROJECT 01",
+  "createdAt": "2026-08-31T12:00:00Z",
+  "updatedAt": "2026-08-31T12:00:00Z",
+  "preset": "CINEMATIC",
+  "voiceover": {
+    "filename": "voiceover.mp3",
+    "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/voiceover.mp3",
+    "duration": 30.0
+  },
+  "voiceoverDuration": 30.0,
+  "imageAssets": [
+    {
+      "id": "asset_1",
+      "filename": "0-03.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-03.png",
+      "timestampSeconds": 3,
+      "displayTimestamp": "00:03",
+      "outputIndex": 1,
+      "prompt": "Cinematic shot of classic garage workshop door opening with dust in the sunbeams",
+      "mediaType": "image/png"
+    },
+    {
+      "id": "asset_2",
+      "filename": "0-07.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-07.png",
+      "timestampSeconds": 7,
+      "displayTimestamp": "00:07",
+      "outputIndex": 1,
+      "prompt": "Vintage 1931 blueprint archive macro focus on technical schematics and measurements",
+      "mediaType": "image/png"
+    },
+    {
+      "id": "asset_3",
+      "filename": "0-12.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-12.png",
+      "timestampSeconds": 12,
+      "displayTimestamp": "00:12",
+      "outputIndex": 1,
+      "prompt": "Engineer footsteps approaching lathe machine precision machining automotive components",
+      "mediaType": "image/png"
+    },
+    {
+      "id": "asset_4",
+      "filename": "0-18.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-18.png",
+      "timestampSeconds": 18,
+      "displayTimestamp": "00:18",
+      "outputIndex": 1,
+      "prompt": "Close-up of miniature 1:3 scale engine block exhaust and thunderous mechanical ignition",
+      "mediaType": "image/png"
+    },
+    {
+      "id": "asset_5",
+      "filename": "0-24.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-24.png",
+      "timestampSeconds": 24,
+      "displayTimestamp": "00:24",
+      "outputIndex": 1,
+      "prompt": "Scale model car driving and accelerating down a private asphalt test track",
+      "mediaType": "image/png"
+    },
+    {
+      "id": "asset_6",
+      "filename": "0-30.png",
+      "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-30.png",
+      "timestampSeconds": 30,
+      "displayTimestamp": "00:30",
+      "outputIndex": 1,
+      "prompt": "Hero dramatic cinematic studio shot of the completed 1:3 scale masterpiece",
+      "mediaType": "image/png"
+    }
+  ],
+  "timeline": {
+    "videoClips": [
+      {
+        "id": "clip_1",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-03.png",
+        "filename": "0-03.png",
+        "startTime": 0.0,
+        "duration": 7.0,
+        "endTime": 7.0,
+        "prompt": "Cinematic shot of classic garage workshop door opening with dust in the sunbeams",
+        "motion": {
+          "preset": "SLOW_PUSH",
+          "intensity": 0.15
+        },
+        "effects": {
+          "brightness": 0.0,
+          "contrast": 1.05,
+          "vignette": 0.2
+        },
+        "transition": {
+          "type": "CUT",
+          "duration": 0.0
+        }
+      },
+      {
+        "id": "clip_2",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-07.png",
+        "filename": "0-07.png",
+        "startTime": 7.0,
+        "duration": 5.0,
+        "endTime": 12.0,
+        "prompt": "Vintage 1931 blueprint archive macro focus on technical schematics and measurements",
+        "motion": {
+          "preset": "KEN_BURNS_TL_BR",
+          "intensity": 0.15
+        },
+        "effects": {
+          "brightness": 0.0,
+          "contrast": 1.0,
+          "vignette": 0.15
+        },
+        "transition": {
+          "type": "FADE",
+          "duration": 0.5
+        }
+      },
+      {
+        "id": "clip_3",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-12.png",
+        "filename": "0-12.png",
+        "startTime": 12.0,
+        "duration": 6.0,
+        "endTime": 18.0,
+        "prompt": "Engineer footsteps approaching lathe machine precision machining automotive components",
+        "motion": {
+          "preset": "SLOW_PULL",
+          "intensity": 0.15
+        },
+        "effects": {
+          "brightness": 0.0,
+          "contrast": 1.0,
+          "vignette": 0.1
+        },
+        "transition": {
+          "type": "DISSOLVE",
+          "duration": 0.5
+        }
+      },
+      {
+        "id": "clip_4",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-18.png",
+        "filename": "0-18.png",
+        "startTime": 18.0,
+        "duration": 6.0,
+        "endTime": 24.0,
+        "prompt": "Close-up of miniature 1:3 scale engine block exhaust and thunderous mechanical ignition",
+        "motion": {
+          "preset": "ZOOM_IN",
+          "intensity": 0.2
+        },
+        "effects": {
+          "brightness": 0.02,
+          "contrast": 1.1,
+          "vignette": 0.25
+        },
+        "transition": {
+          "type": "CUT",
+          "duration": 0.0
+        }
+      },
+      {
+        "id": "clip_5",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/demo-project/images/0-24.png",
+        "filename": "0-24.png",
+        "startTime": 24.0,
+        "duration": 6.0,
+        "endTime": 30.0,
+        "prompt": "Scale model car driving and accelerating down a private asphalt test track",
+        "motion": {
+          "preset": "PAN_RIGHT",
+          "intensity": 0.15
+        },
+        "effects": {
+          "brightness": 0.0,
+          "contrast": 1.0,
+          "vignette": 0.15
+        },
+        "transition": {
+          "type": "SLIDE_LEFT",
+          "duration": 0.4
+        }
+      }
+    ],
+    "captions": [
+      {
+        "id": "cap_1",
+        "startTime": 0.0,
+        "endTime": 3.0,
+        "duration": 3.0,
+        "text": "Welcome to the functional scale engineering workshop."
+      },
+      {
+        "id": "cap_2",
+        "startTime": 3.0,
+        "endTime": 7.0,
+        "duration": 4.0,
+        "text": "It all began with an archive of original 1931 blueprints."
+      },
+      {
+        "id": "cap_3",
+        "startTime": 7.0,
+        "endTime": 12.0,
+        "duration": 5.0,
+        "text": "Every single component was machined from solid aerospace-grade alloy."
+      },
+      {
+        "id": "cap_4",
+        "startTime": 12.0,
+        "endTime": 18.0,
+        "duration": 6.0,
+        "text": "The custom handcrafted engine produces real combustion power."
+      },
+      {
+        "id": "cap_5",
+        "startTime": 18.0,
+        "endTime": 24.0,
+        "duration": 6.0,
+        "text": "Testing the vehicle on the track proved the suspension and chassis rigidity."
+      },
+      {
+        "id": "cap_6",
+        "startTime": 24.0,
+        "endTime": 30.0,
+        "duration": 6.0,
+        "text": "A breathtaking tribute to historic automotive craftsmanship."
+      }
+    ],
+    "sfxClips": [
+      {
+        "id": "sfx_1",
+        "name": "fast_whoosh_01",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/assets/sfx/whoosh/fast_whoosh_01.wav",
+        "startTime": 0.0,
+        "duration": 0.8,
+        "volume": 0.75
+      },
+      {
+        "id": "sfx_2",
+        "name": "heavy_impact_01",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/assets/sfx/impact/heavy_impact_01.wav",
+        "startTime": 7.0,
+        "duration": 1.8,
+        "volume": 0.8
+      },
+      {
+        "id": "sfx_3",
+        "name": "door_slam_01",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/assets/sfx/door/door_slam_01.wav",
+        "startTime": 12.0,
+        "duration": 1.2,
+        "volume": 0.7
+      },
+      {
+        "id": "sfx_4",
+        "name": "car_pass_01",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/assets/sfx/vehicle/car_pass_01.wav",
+        "startTime": 24.0,
+        "duration": 3.5,
+        "volume": 0.85
+      }
+    ],
+    "musicClips": [
+      {
+        "id": "bgm_1",
+        "name": "cinematic_ambient_01",
+        "path": "/working_dir/c_434d79c9507458a0/maq_auto_editor_ultra/assets/music/cinematic_ambient_01.mp3",
+        "startTime": 0.0,
+        "duration": 30.0,
+        "volume": 0.35,
+        "fadeIn": 1.0,
+        "fadeOut": 1.5,
+        "duckingEnabled": true
+      }
+    ]
+  },
+  "audioSettings": {
+    "duckingStrengthDB": -18,
+    "voiceoverVolume": 1.0,
+    "musicVolume": 0.35,
+    "sfxVolume": 0.75
+  },
+  "captionStyle": "BOLD_YELLOW",
+  "exportSettings": {
+    "resolution": "1080p",
+    "fps": 30,
+    "codec": "h264",
+    "quality": "balanced",
+    "audioBitrate": "128k",
+    "useHardwareAcceleration": true
+  }
+}

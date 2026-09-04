@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Large Binary Executables (FFmpeg binaries exceed GitHub 100MB file limit)
+bin/
+*.exe
+*.dll
+
+# Media & Render Artifacts
+exports/
+temp/
+cache/
+projects/media/
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.zip
+*.tar.gz
+
+# Environment & Credentials
+.env
+.env.local
+*.log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.gemini/

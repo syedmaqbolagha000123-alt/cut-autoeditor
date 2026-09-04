@@ -1,0 +1,421 @@
+/**
+ * MAQ AUTO EDITOR ULTRA - Multi-Track Professional Timeline Styles
+ */
+
+/* ZONE E: TIMELINE AREA */
+.timeline-workspace {
+  height: var(--timeline-height);
+  background-color: var(--bg-panel);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Timeline Toolbar */
+.timeline-toolbar {
+  height: 32px;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+
+.t-toolbar-left, .t-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-tb {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-tb:hover {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.tb-sep {
+  width: 1px;
+  height: 14px;
+  background-color: var(--border-subtle);
+  margin: 0 2px;
+}
+
+.toggle-pill {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggle-pill.active {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.zoom-slider-container {
+  display: flex;
+  align-items: center;
+}
+
+.range-slider-sm {
+  width: 80px;
+  accent-color: var(--accent-primary);
+}
+
+.btn-zoom-step {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+/* Timeline Body (Fixed Headers Column + Scrollable Stage) */
+.timeline-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-app);
+}
+
+/* Fixed Track Headers Column */
+.timeline-headers-column {
+  width: 90px;
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  z-index: 40;
+}
+
+.ruler-header-corner {
+  height: 22px;
+  background-color: var(--bg-panel-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.track-header-cell {
+  height: 32px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px 0 8px;
+  background-color: var(--bg-panel);
+}
+
+.track-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.track-ctrls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.4;
+  transition: opacity 0.15s ease;
+}
+
+.track-header-cell:hover .track-ctrls {
+  opacity: 1.0;
+}
+
+.btn-ctrl {
+  font-size: 9px;
+  cursor: pointer;
+  padding: 1px;
+}
+
+/* Scrollable Stage */
+.timeline-scroll-stage {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+  background-color: #08090C;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0B0F17;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar-track {
+  background: #0B0F17;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+  border: 1px solid #1E293B;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar-thumb:hover {
+  background: #6366F1;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar-corner {
+  background: #0B0F17;
+}
+
+.timeline-scroll-stage::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Time Ruler */
+.timeline-ruler {
+  height: 22px;
+  background-color: var(--bg-panel-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  left: 0;
+  min-width: 2500px;
+  display: flex;
+  z-index: 25;
+  cursor: pointer;
+}
+
+.ruler-tick-mark {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: 3px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--text-muted);
+}
+
+/* Playhead */
+.timeline-playhead-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--color-danger);
+  z-index: 50;
+  pointer-events: none;
+  left: 0px;
+}
+
+.playhead-badge {
+  position: absolute;
+  top: -1px;
+  left: -24px;
+  width: 48px;
+  height: 14px;
+  background-color: var(--color-danger);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.playhead-pin {
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-danger);
+}
+
+/* Multi-Track Lanes Container */
+.timeline-lanes-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 2500px;
+  padding-bottom: 10px;
+}
+
+.timeline-lane {
+  height: 32px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  background-color: rgba(17, 20, 25, 0.4);
+}
+
+.timeline-lane:nth-child(even) {
+  background-color: rgba(22, 26, 32, 0.3);
+}
+
+/* Clip Box on Timeline */
+.timeline-clip-box {
+  position: absolute;
+  top: 3px;
+  height: 26px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  transition: outline 0.1s ease;
+}
+
+.timeline-clip-box.selected {
+  outline: 2px solid #fff;
+  z-index: 15;
+}
+
+/* Track Lane Specific Clip Colors */
+.lane-video .timeline-clip-box {
+  background-color: var(--track-video);
+  border-color: var(--track-video-border);
+}
+
+.lane-overlay .timeline-clip-box {
+  background-color: var(--track-overlay);
+  border-color: var(--track-overlay-border);
+}
+
+.lane-captions .timeline-clip-box {
+  background-color: var(--track-caption);
+  border-color: var(--track-caption-border);
+}
+
+.lane-voiceover .timeline-clip-box {
+  background-color: var(--track-vo);
+  border-color: var(--track-vo-border);
+}
+
+.lane-sfx .timeline-clip-box {
+  background-color: var(--track-sfx);
+  border-color: var(--track-sfx-border);
+}
+
+.lane-music .timeline-clip-box {
+  background-color: var(--track-music);
+  border-color: var(--track-music-border);
+}
+
+/* Trim Handles */
+.clip-trim-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.timeline-clip-box:hover .clip-trim-handle {
+  opacity: 1;
+}
+
+.clip-trim-left { left: 0; }
+.clip-trim-right { right: 0; }
+
+.clip-badge-motion {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-size: 8px;
+  margin-right: 4px;
+}
+
+/* CapCut In / Out Region Highlight & Markers */
+.timeline-inout-region {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(56, 189, 248, 0.12);
+  border-left: 2px solid #38BDF8;
+  border-right: 2px solid #38BDF8;
+  pointer-events: none;
+  z-index: 25;
+  transition: opacity 0.15s ease;
+}
+
+.timeline-inout-marker-in,
+.timeline-inout-marker-out {
+  position: absolute;
+  top: 0;
+  height: 20px;
+  background: #0284C7;
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 2px;
+  z-index: 35;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.timeline-inout-marker-in {
+  border-top-left-radius: 4px;
+}
+
+.timeline-inout-marker-out {
+  border-top-right-radius: 4px;
+}
+
+.in-out-badge {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  font-size: 10px;
+  font-family: monospace;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
