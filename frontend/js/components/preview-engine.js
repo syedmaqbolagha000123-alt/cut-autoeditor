@@ -486,4 +486,115 @@ class PreviewEngine {
       this.captionOverlay.classList.add('hidden');
     }
   }
+
+  /**
+   * Export video directly in browser using Canvas Stream & MediaRecorder
+   * Enables 100% serverless video exports on Vercel or any static host!
+   */
+  async exportInBrowser(options = {}) {
+    const totalDuration = this.getTotalDuration();
+    const onProgress = options.onProgress || (() => {});
+
+    return new Promise((resolve, reject) => {
+      try {
+        this.pause();
+        this.seek(0);
+
+        const fps = options.fps || 30;
+        const canvasStream = this.canvas.captureStream(fps);
+
+        const audioTracks = [];
+        let audioCtx = null;
+        let dest = null;
+
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+            dest = audioCtx.createMediaStreamDestination();
+
+            if (this.voiceoverAudio && this.voiceoverAudio.src) {
+              const voSrc = audioCtx.createMediaElementSource(this.voiceoverAudio);
+              voSrc.connect(dest);
+              voSrc.connect(audioCtx.destination);
+            }
+            if (this.musicAudio && this.musicAudio.src) {
+              const bgmSrc = audioCtx.createMediaElementSource(this.musicAudio);
+              bgmSrc.connect(dest);
+              bgmSrc.connect(audioCtx.destination);
+            }
+            dest.stream.getAudioTracks().forEach(t => audioTracks.push(t));
+          }
+        } catch (audioErr) {
+          console.warn('Audio capture note:', audioErr);
+        }
+
+        const combinedTracks = [...canvasStream.getVideoTracks(), ...audioTracks];
+        const recordStream = new MediaStream(combinedTracks);
+
+        const preferredTypes = [
+          'video/mp4;codecs=avc1',
+          'video/mp4',
+          'video/webm;codecs=vp9,opus',
+          'video/webm;codecs=vp8,opus',
+          'video/webm'
+        ];
+        let mimeType = preferredTypes.find(t => typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(t)) || '';
+        const recOptions = mimeType ? { mimeType, videoBitsPerSecond: 8000000 } : { videoBitsPerSecond: 8000000 };
+        const recorder = new MediaRecorder(recordStream, recOptions);
+        const recordedChunks = [];
+
+        recorder.ondataavailable = (e) => {
+          if (e.data && e.data.size > 0) {
+            recordedChunks.push(e.data);
+          }
+        };
+
+        recorder.onstop = () => {
+          const finalMime = mimeType || 'video/webm';
+          const ext = finalMime.includes('mp4') ? 'mp4' : 'webm';
+          const blob = new Blob(recordedChunks, { type: finalMime });
+          const downloadUrl = URL.createObjectURL(blob);
+          if (audioCtx) {
+            try { audioCtx.close(); } catch(e) {}
+          }
+          this.seek(0);
+          resolve({ blob, downloadUrl, ext });
+        };
+
+        recorder.start(100);
+
+        this.play();
+
+        const checkTimer = setInterval(() => {
+          const currentT = timelineStore.currentTime;
+          const progressPercent = Math.min(99, Math.round((currentT / totalDuration) * 100));
+
+          onProgress({
+            progressPercent,
+            stage: `Recording video frames (${currentT.toFixed(1)}s / ${totalDuration.toFixed(1)}s)...`,
+            fps
+          });
+
+          if (currentT >= totalDuration - 0.1 || !this.isPlaying) {
+            clearInterval(checkTimer);
+            this.pause();
+            onProgress({
+              progressPercent: 100,
+              stage: 'Finalizing and packaging video file...',
+              fps
+            });
+            setTimeout(() => {
+              if (recorder.state !== 'inactive') {
+                recorder.stop();
+              }
+            }, 300);
+          }
+        }, 100);
+
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
 }

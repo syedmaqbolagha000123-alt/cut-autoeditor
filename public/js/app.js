@@ -1295,9 +1295,50 @@ function initModalActions() {
     }
 
     try {
-      await ensureProjectAssetsUploaded(projectStore.project);
-      const jobRes = await ApiClient.startRender(projectStore.project, exportSettings);
-      pollExportProgress(jobRes.jobId);
+      let backendStarted = false;
+      try {
+        await ensureProjectAssetsUploaded(projectStore.project);
+        const jobRes = await ApiClient.startRender(projectStore.project, exportSettings);
+        if (jobRes && jobRes.jobId) {
+          backendStarted = true;
+          pollExportProgress(jobRes.jobId);
+          return;
+        }
+      } catch (beErr) {
+        console.warn('Backend render not available, switching to browser export:', beErr);
+      }
+
+      // In-Browser Client-Side Rendering Fallback (Canvas + MediaRecorder)
+      window.toastSystem.show('Web Studio: Rendering video directly in browser...', 'info', 3000);
+      const renderFill = document.getElementById('renderProgressFill');
+      const renderStage = document.getElementById('renderStageText');
+      const renderPercent = document.getElementById('renderPercentText');
+      const renderFps = document.getElementById('renderFpsText');
+      const renderDownloadBtn = document.getElementById('btnDownloadExportedVideo');
+
+      const expResult = await previewEngine.exportInBrowser({
+        fps: 30,
+        onProgress: (prog) => {
+          if (renderFill) renderFill.style.width = `${prog.progressPercent}%`;
+          if (renderPercent) renderPercent.textContent = `${prog.progressPercent}%`;
+          if (renderStage) renderStage.textContent = prog.stage;
+          if (renderFps) renderFps.textContent = `${prog.fps || 30} FPS`;
+        }
+      });
+
+      if (renderFill) renderFill.style.width = '100%';
+      if (renderPercent) renderPercent.textContent = '100%';
+      if (renderStage) renderStage.textContent = '✓ Rendering Complete! Downloading video...';
+
+      if (renderDownloadBtn) {
+        renderDownloadBtn.href = expResult.downloadUrl;
+        const pName = (projectStore.project.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
+        renderDownloadBtn.download = `${pName}_export.${expResult.ext}`;
+        renderDownloadBtn.classList.remove('hidden');
+        renderDownloadBtn.click();
+      }
+
+      window.toastSystem.show(`🎉 Video rendered & downloaded successfully! (${expResult.ext.toUpperCase()})`, 'success', 5000);
     } catch (e) {
       window.toastSystem.show(`Render failed: ${e.message}`, 'error');
     }
@@ -2950,16 +2991,58 @@ function initCreatorExportHandlers() {
     downloadBtn?.classList.add('hidden');
 
     try {
-      window.toastSystem?.show('Synchronizing assets for master render...', 'info', 1500);
-      await ensureProjectAssetsUploaded(p);
-      const res = await ApiClient.startRender(p, exportSettings);
-      if (res && res.jobId) {
-        pollCreatorExportProgress(res.jobId);
-      } else {
-        throw new Error('Could not launch render job.');
+      window.toastSystem?.show('Preparing master render...', 'info', 1500);
+
+      // 1. Try high-performance backend FFmpeg render if available
+      try {
+        await ensureProjectAssetsUploaded(p);
+        const res = await ApiClient.startRender(p, exportSettings);
+        if (res && res.jobId) {
+          pollCreatorExportProgress(res.jobId);
+          return;
+        }
+      } catch (backendErr) {
+        console.warn('Backend FFmpeg render unavailable, activating browser renderer:', backendErr);
       }
+
+      // 2. Client-Side In-Browser Fallback (Canvas Stream & MediaRecorder)
+      // Works seamlessly on Vercel or any web host with zero backend dependencies!
+      window.toastSystem?.show('Web Cloud Mode: Rendering master video directly in your browser with Canvas & MediaRecorder...', 'info', 3500);
+
+      const fill = document.getElementById('creatorRenderProgressFill');
+      const stage = document.getElementById('creatorRenderStage');
+      const percent = document.getElementById('creatorRenderPercent');
+      const fps = document.getElementById('creatorRenderFps');
+      const eta = document.getElementById('creatorRenderEta');
+
+      const result = await previewEngine.exportInBrowser({
+        fps: 30,
+        onProgress: (prog) => {
+          if (fill) fill.style.width = `${prog.progressPercent}%`;
+          if (percent) percent.textContent = `${prog.progressPercent}%`;
+          if (stage) stage.textContent = prog.stage;
+          if (fps) fps.textContent = `${prog.fps || 30} FPS`;
+          const remainingSec = Math.max(0, Math.round((previewEngine.getTotalDuration() * (100 - prog.progressPercent)) / 100));
+          if (eta) eta.textContent = `ETA: ${remainingSec}s`;
+        }
+      });
+
+      if (fill) fill.style.width = '100%';
+      if (percent) percent.textContent = '100%';
+      if (stage) stage.textContent = '✓ Rendering Complete! Downloading video...';
+
+      if (downloadBtn) {
+        downloadBtn.href = result.downloadUrl;
+        const cleanName = (p.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
+        downloadBtn.download = `${cleanName}_export.${result.ext}`;
+        downloadBtn.classList.remove('hidden');
+        downloadBtn.click();
+      }
+
+      window.toastSystem.show(`🎉 Video rendered & downloaded successfully! (${result.ext.toUpperCase()})`, 'success', 5000);
+
     } catch (err) {
-      window.toastSystem.show(`Render launch failed: ${err.message}`, 'error');
+      window.toastSystem.show(`Render failed: ${err.message}`, 'error');
       startBtn?.classList.remove('hidden');
       progressBox?.classList.add('hidden');
     }
