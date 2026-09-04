@@ -1,6 +1,6 @@
 {
-  "name": "maq-auto-editor-ultra",
-  "version": "1.0.0",
+  "name": "cut-autoeditor",
+  "version": "1.0.1",
   "description": "Local automated storytelling video editor with timestamped timeline construction, smart motion, conservative SFX, audio ducking, subtitle burning, and realistic video compression.",
   "main": "launcher.js",
   "scripts": {
