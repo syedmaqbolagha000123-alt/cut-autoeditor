@@ -510,23 +510,31 @@ class PreviewEngine {
         try {
           const AudioContextClass = window.AudioContext || window.webkitAudioContext;
           if (AudioContextClass) {
-            audioCtx = new AudioContextClass();
-            dest = audioCtx.createMediaStreamDestination();
+            if (!this._audioCtx || this._audioCtx.state === 'closed') {
+              this._audioCtx = new AudioContextClass();
+            }
+            dest = this._audioCtx.createMediaStreamDestination();
 
             if (this.voiceoverAudio && this.voiceoverAudio.src) {
-              const voSrc = audioCtx.createMediaElementSource(this.voiceoverAudio);
-              voSrc.connect(dest);
-              voSrc.connect(audioCtx.destination);
+              if (!this.voiceoverAudio._srcNode) {
+                this.voiceoverAudio._srcNode = this._audioCtx.createMediaElementSource(this.voiceoverAudio);
+              }
+              try { this.voiceoverAudio._srcNode.connect(dest); } catch(e) {}
+              try { this.voiceoverAudio._srcNode.connect(this._audioCtx.destination); } catch(e) {}
             }
             if (this.musicAudio && this.musicAudio.src) {
-              const bgmSrc = audioCtx.createMediaElementSource(this.musicAudio);
-              bgmSrc.connect(dest);
-              bgmSrc.connect(audioCtx.destination);
+              if (!this.musicAudio._srcNode) {
+                this.musicAudio._srcNode = this._audioCtx.createMediaElementSource(this.musicAudio);
+              }
+              try { this.musicAudio._srcNode.connect(dest); } catch(e) {}
+              try { this.musicAudio._srcNode.connect(this._audioCtx.destination); } catch(e) {}
             }
-            dest.stream.getAudioTracks().forEach(t => audioTracks.push(t));
+            if (dest && dest.stream) {
+              dest.stream.getAudioTracks().forEach(t => audioTracks.push(t));
+            }
           }
         } catch (audioErr) {
-          console.warn('Audio capture note:', audioErr);
+          console.warn('Audio capture note (video will record with canvas):', audioErr);
         }
 
         const combinedTracks = [...canvasStream.getVideoTracks(), ...audioTracks];

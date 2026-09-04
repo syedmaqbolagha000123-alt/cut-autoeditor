@@ -5,9 +5,13 @@
 // Global Studio State Variables (hoisted and immediately available everywhere)
 var currentWorkspaceMode = 'creator';
 var currentCreatorStep = 1;
+var previewPlayer = null;
+var previewEngine = null;
 if (typeof window !== 'undefined') {
   window.currentWorkspaceMode = currentWorkspaceMode;
   window.currentCreatorStep = currentCreatorStep;
+  window.previewPlayer = previewPlayer;
+  window.previewEngine = previewEngine;
 }
 
 // Toast Notification Manager
@@ -101,6 +105,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 2. Viewport Canvas & Story Studio Preview
   safeRun('initPreviewPlayer', () => {
     window.previewPlayer = new PreviewEngine('previewCanvas', 'captionOverlay');
+    window.previewEngine = window.previewPlayer;
+    previewPlayer = window.previewPlayer;
+    previewEngine = window.previewPlayer;
   });
 
   // 3. Resilient Fallbacks for Timeline & Inspector (Graceful in Single-Studio Architecture)
@@ -1316,7 +1323,12 @@ function initModalActions() {
       const renderFps = document.getElementById('renderFpsText');
       const renderDownloadBtn = document.getElementById('btnDownloadExportedVideo');
 
-      const expResult = await previewEngine.exportInBrowser({
+      const engine = window.previewPlayer || window.previewEngine || previewEngine || previewPlayer;
+      if (!engine) {
+        throw new Error('Video preview player not ready. Please reload the page.');
+      }
+
+      const expResult = await engine.exportInBrowser({
         fps: 30,
         onProgress: (prog) => {
           if (renderFill) renderFill.style.width = `${prog.progressPercent}%`;
@@ -1335,8 +1347,15 @@ function initModalActions() {
         const pName = (projectStore.project.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
         renderDownloadBtn.download = `${pName}_export.${expResult.ext}`;
         renderDownloadBtn.classList.remove('hidden');
-        renderDownloadBtn.click();
       }
+
+      const dlLink = document.createElement('a');
+      dlLink.href = expResult.downloadUrl;
+      const safeName = (projectStore.project.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
+      dlLink.download = `${safeName}_export.${expResult.ext}`;
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      setTimeout(() => dlLink.remove(), 1000);
 
       window.toastSystem.show(`🎉 Video rendered & downloaded successfully! (${expResult.ext.toUpperCase()})`, 'success', 5000);
     } catch (e) {
@@ -3015,14 +3034,19 @@ function initCreatorExportHandlers() {
       const fps = document.getElementById('creatorRenderFps');
       const eta = document.getElementById('creatorRenderEta');
 
-      const result = await previewEngine.exportInBrowser({
+      const engine = window.previewPlayer || window.previewEngine || previewEngine || previewPlayer;
+      if (!engine) {
+        throw new Error('Video preview player not ready. Please reload the page.');
+      }
+
+      const result = await engine.exportInBrowser({
         fps: 30,
         onProgress: (prog) => {
           if (fill) fill.style.width = `${prog.progressPercent}%`;
           if (percent) percent.textContent = `${prog.progressPercent}%`;
           if (stage) stage.textContent = prog.stage;
           if (fps) fps.textContent = `${prog.fps || 30} FPS`;
-          const remainingSec = Math.max(0, Math.round((previewEngine.getTotalDuration() * (100 - prog.progressPercent)) / 100));
+          const remainingSec = Math.max(0, Math.round((engine.getTotalDuration() * (100 - prog.progressPercent)) / 100));
           if (eta) eta.textContent = `ETA: ${remainingSec}s`;
         }
       });
@@ -3036,8 +3060,15 @@ function initCreatorExportHandlers() {
         const cleanName = (p.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
         downloadBtn.download = `${cleanName}_export.${result.ext}`;
         downloadBtn.classList.remove('hidden');
-        downloadBtn.click();
       }
+
+      const dlLink = document.createElement('a');
+      dlLink.href = result.downloadUrl;
+      const safeName = (p.name || 'MAK_Video_Project').replace(/[^a-zA-Z0-9_-]/g, '_');
+      dlLink.download = `${safeName}_export.${result.ext}`;
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      setTimeout(() => dlLink.remove(), 1000);
 
       window.toastSystem.show(`🎉 Video rendered & downloaded successfully! (${result.ext.toUpperCase()})`, 'success', 5000);
 
