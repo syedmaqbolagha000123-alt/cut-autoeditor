@@ -5,6 +5,8 @@
   "main": "launcher.js",
   "scripts": {
     "start": "node launcher.js",
+    "start:server": "node backend/server.js",
+    "build": "echo MAQ AutoEditor ready",
     "test": "node tests/test-runner.js",
     "generate-demo": "python3 scripts/generate_sample_assets.py",
     "pack:zip": "node packaging/package-release.js"

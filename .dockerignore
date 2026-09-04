@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+bin/
+temp/*
+exports/*
+cache/*
+.user_uploaded
+*.bat
+*.ps1
+*.cmd
+tests/

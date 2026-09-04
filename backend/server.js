@@ -140,8 +140,8 @@ function serveStaticFile(req, res, filePath) {
   }
 }
 
-// HTTP Server
-const server = http.createServer(async (req, res) => {
+// Master Request Handler
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
   const method = req.method;
@@ -164,7 +164,8 @@ const server = http.createServer(async (req, res) => {
       if (pathname === '/api/system/status' && method === 'GET') {
         const hardware = HardwareDetector.getSystemInfo();
         const storage = StorageService.getStorageMetrics();
-        return sendJson(res, 200, { hardware, storage });
+        const environment = process.env.VERCEL ? 'vercel-serverless' : 'desktop-server';
+        return sendJson(res, 200, { hardware, storage, environment });
       }
 
       // 2. Storage Manager
@@ -304,6 +305,11 @@ const server = http.createServer(async (req, res) => {
 
       // 10. Render Engine
       if (pathname === '/api/render/start' && method === 'POST') {
+        if (process.env.VERCEL) {
+          return sendJson(res, 400, {
+            error: 'Vercel serverless execution has a 10s limit and does not support heavy FFmpeg rendering. For full video exports online, deploy using the included Dockerfile to Render.com / Railway.app, or run locally.'
+          });
+        }
         const { project, exportSettings } = await readJsonBody(req);
         const job = RenderJobService.startRender(project, exportSettings, {
           onProgress: (j) => broadcastWS({ type: 'render_progress', job: j }),
@@ -485,7 +491,10 @@ const server = http.createServer(async (req, res) => {
     logger.error(`Error processing request: ${req.url}`, { message: err.message, stack: err.stack });
     sendJson(res, 500, { error: err.message || 'Internal server error.' });
   }
-});
+}
+
+// HTTP Server
+const server = http.createServer(handleRequest);
 
 // Optional WebSocket setup (gracefully handles if 'ws' package is not installed)
 let wss = null;
@@ -516,12 +525,14 @@ function broadcastWS(data) {
   }
 }
 
-// Start Server
-server.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(` MAQ AUTO EDITOR ULTRA SERVER RUNNING ON PORT ${PORT}`);
-  console.log(` Local UI: http://localhost:${PORT}`);
-  console.log(`=======================================================`);
-});
+// Start Server (skips listen if running in Vercel Serverless)
+if (!process.env.VERCEL) {
+  server.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(` MAQ AUTO EDITOR ULTRA SERVER RUNNING ON PORT ${PORT}`);
+    console.log(` Local UI: http://localhost:${PORT}`);
+    console.log(`=======================================================`);
+  });
+}
 
-module.exports = { server, wss, broadcastWS };
+module.exports = { server, handleRequest, wss, broadcastWS };
